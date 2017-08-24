@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	  *{cursor:pointer;}
+      .content{width:100%;text-align:center;}
+      .red{background:red;}
+      .yellow{background:yellow;}
+      .green{background:green;}
+	</style>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript">
+       function zh(){
+       	  var t=document.getElementsByName("checkbox");
+		  var sum = 0;
+		  for(var i=1;i<t.length+1;i++){
+		       if(document.getElementById("checkbox" + i).checked){
+		          var v = document.getElementById("span" + i).innerText;
+		          if(v=="" || isNaN(v)) 
+		          v = 0;
+		          v = parseFloat(v);
+		          sum += v;    
+		      }
+		   }
+		  sum = Math.round(sum * 10000)/10000;
+		  document.getElementById("zonghe").innerText=sum;
+       }
+
+	</script>
+</head>
+<body>
+<form id="form1" name="form1" method="post" action="">
+	<table cellspacing="0" cellpadding="0" border="1" width="900">
+	   <tr>
+	   	  <td>
+	   	    <input type="checkbox" name="checkbox" id="checkbox1"  onclick="zh()">
+	   	  </td>
+	   	  <td>
+	   	  	<span id="span1">400</span>
+	   	  </td>
+	   </tr>	
+	   <tr>
+	   	  <td>
+	   	  	<input type="checkbox" name="checkbox" id="checkbox2"  onclick="zh()">
+	   	  </td>
+	   	  <td>
+	   	  	<span id="span2">500</span>
+	   	  </td>
+	   </tr>
+	   <tr>
+	   	  <td>
+	   	  	<span>综合</span>
+	   	  </td>
+	   	  <td>
+	   	  	<span id="zonghe"></span>
+	   	  </td>
+	   </tr>		
+	</table>
+ </form>
+ <div id="times_container"  style="border:1px; border-color:#999999; border-style:solid; background:#333333; color:#FFFFFF; width:500px; height:40px; line-height:40px; font-size:24px">
+
+距离活动结束还有：<span id="days"> </span>天 
+
+                  <span id="int_hours"> </span>时  
+
+                  <span id="minutes"> </span>分    
+
+                  <span id="second"> </span>秒   
+
+</div>
+<div class="content">
+	<div class="color_select">
+		<span id="red_color">红</span>
+		<span id="yellow_color">黄</span>
+		<span id="green_color">绿</span>
+	</div>
+	<div class="color_content" id="color_bg">
+		对宁波万科如方便方便你我开车不能捂被窝日报网部分能否为司法看吧
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+	$(function(){
+     var t=$("input[name=checkbox]")
+     for(i=0;i<t.length+1;i++){
+     	$("#span"+i).css('display','none');
+     }
+     $("input[name=checkbox]").click(function() {
+     	var ids=$(this).attr("id");
+     	var i=ids.split("checkbox");
+     	$("#span"+i[1]).css('display','block');
+     });
+    $("#red_color").click(function(){
+     	$("#color_bg").css('background','red');
+     });
+    $("#yellow_color").click(function(){
+     	$("#color_bg").css('background','yellow');
+     });
+    $("#green_color").click(function(){
+     	$("#color_bg").css('background','green');
+     });
+	});
+	setTimeout("count_down()",1000);
+	var int_day=document.getElementById("days");
+	var int_hours=document.getElementById("int_hours");
+	var int_minutes=document.getElementById("minutes");
+	var int_second=document.getElementById("second");
+	var end_time=new Date("2015/05/27 12:30:00")
+	end_time=end_time.getTime();
+	function count_down(){
+		var now_time=new Date();
+		now_time=now_time.getTime();
+		var time_distance=end_time - now_time;
+		var time_day,time_hours,time_minutes,time_second;
+		if(time_distance>0)
+		{
+			time_day=Math.floor(time_distance/86400000)
+            time_distance -=time_day*86400000;
+            time_hours=Math.floor(time_distance/3600000)
+            time_distance -=time_hours*3600000;
+            time_minutes=Math.floor(time_distance/60000)
+            time_distance -=time_minutes*60000;
+            time_second=Math.floor(time_distance/1000);
+            if(time_hours<10)
+            time_hour="0"+time_hours;
+            if(time_minutes<10)
+            time_minutes="0"+time_minutes;
+            if(time_second<10)
+            time_second="0"+time_second;
+            int_day.innerHTML=time_day;
+            int_hours.innerHTML=time_hours;
+            int_minutes.innerHTML=time_minutes;
+            int_second.innerHTML=time_second;
+            setTimeout("count_down()",1000);
+		}else{
+          end_time=end_time+1*24*60*60*1000
+          setTimeout("count_down()",1000);
+		}
+	}
+</script>
+</html>

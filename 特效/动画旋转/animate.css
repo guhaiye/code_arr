@@ -1,0 +1,10 @@
+.animate_k1{background:url("css/sprite/ani.png");background-position:0px 0px;width:345px;height:348px;
+animation:myfirst 8s linear infinite;position:absolute;}
+.animate_k2{background:url("css/sprite/ani.png");position:absolute;background-position:-347px 0px;width:345px;height:348px;
+animation:myfirst2 6s linear infinite;}
+.animate_k3{background:url("css/sprite/ani.png");position:absolute;background-position:-694px 0px;width:345px;height:348px;}
+.animate_bg1{width:200px;height:200px;background:rgba(235,21,21,1);animation:opacity_fade 2s linear infinite;}
+@keyframes opacity_fade{
+	from{background:rgba(235,21,21,1);}
+	to{background:rgba(235,21,21,0.5);}
+}

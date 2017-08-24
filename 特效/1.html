@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<title>结构性伪类选择符 E:first-child_CSS参考手册_web前端开发参考手册系列</title>
+<meta name="author" content="Joy Du(飘零雾雨), dooyoe@gmail.com" />
+<meta name="copyright" content="www.doyoe.com" />
+<style>
+h1{font-size:16px;}
+#a > li:first-child{color:#f00;}
+#triangle-topright {
+    width: 0;
+    height: 0;
+    border-top: 80px solid red;
+    border-left: 80px solid transparent; 
+}
+</style>
+</head>
+<body>
+<h1>注意是li:first-child，而不是ul:first-child</h1>
+<ul id="a">
+	<li>结构性伪类选择符 E:first-child</li>
+	<li>结构性伪类选择符 E:first-child</li>
+	<li>结构性伪类选择符 E:first-child</li>
+	<li>结构性伪类选择符 E:first-child</li>
+</ul>
+
+<div id="triangle-topright"></div>
+<script>
+   window.onload = function(){
+            var text = document.getElementById('txt'),
+            str = text.innerHTML,
+            textLeng = 350;
+            if(str.length > textLeng ){
+                  text .innerHTML = str.substring(0,textLeng )+"... ...";
+            } 
+}
+</script>
+<div id="txt">
+在传统的网页实现聊天室的方法是通过每隔一段时间请求服务器获取相关聊天信息来实现,然而html5带来的websocket功能改变这了这种方式在传统的网页实现聊天室的方法是通过每隔一段时间请求服务器获取相关聊天信息来实现,然而html5带来的websocket功能改变这了这种方式在传统的网页实现聊天室的方法是通过每隔一段时间请求服务器获取相关聊天信息来实现,然而html5带来的websocket功能改变这了这种方式在传统的网页实现聊天室的方法是通过每隔一段时间请求服务器获取相关聊天信息来实现,然而html5带来的websocket功能改变这了这种方式在传统的网页实现聊天室的方法是通过每隔一段时间请求服务器获取相关聊天信息来实现,然而html5带来的websocket功能改变这了这种方式在传统的网页实现聊天室的方法是通过每隔一段时间请求服务器获取相关聊天信息来实现,然而html5带来的websocket功能改变这了这种方式在传统的网页实现聊天室的方法是通过每隔一段时间请求服务器获取相关聊天信息来实现,然而html5带来的websocket功能改变这了这种方式在传统的网页实现聊天室的方法是通过每隔一段时间请求服务器获取相关聊天信息来实现,然而html5带来的websocket功能改变这了这种方式在传统的网页实现聊天室的方法是通过每隔一段时间请求服务器获取相关聊天信息来实现,然而html5带来的websocket功能改变这了这种方式在传统的网页实现聊天室的方法是通过每隔一段时间请求服务器获取相关聊天信息来实现,然而html5带来的websocket功能改变这了这种方式在传统的网页实现聊天室的方法是通过每隔一段时间请求服务器获取相关聊天信息来实现,然而html5带来的websocket功能改变这了这种方式
+</div>
+<div class="">
+  <input type="checkbox" onclick="myFunction()"> 是都
+</div>
+<script type="text/javascript">
+    function myFunction(){
+
+    }
+</script>
+<del>只殴打我</del>
+
+<canvas id="q"></canvas>
+<div id="main" style=" position:absolute;z-index:100;top:10px;width:960px;height:400px;background:red;">123</div>
+<script type="text/javascript"> 
+var s = window.screen; 
+var width = q.width = s.width; 
+var height = q.height = s.height; 
+var letters = Array(256).join(1).split(''); 
+    //255个1组成的数组
+var _div=document.getElementById("main"); 
+    _div.style.left=(width-960)/2+"px"; 
+    //给主页面left定位;
+var draw = function () { 
+q.getContext('2d').fillStyle='rgba(0,0,0,.05)'; 
+q.getContext('2d').fillRect(0,0,width,height); 
+q.getContext('2d').fillStyle='#0F0'; 
+letters.map(function(y_pos, index){ 
+text = String.fromCharCode(3e4+Math.random()*33); 
+x_pos = index * 10; 
+q.getContext('2d').fillText(text, x_pos, y_pos); 
+letters[index] = (y_pos > 758 + Math.random() * 1e4) ? 0 : y_pos + 10; 
+}); 
+}; 
+setInterval(draw, 33); 
+</script> 
+
+</body>
+</html>
+			

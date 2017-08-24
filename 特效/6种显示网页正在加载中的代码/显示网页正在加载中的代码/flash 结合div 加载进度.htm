@@ -1,0 +1,26 @@
+<div id="d1"> 
+<OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="mFlash" 
+WIDTH="600" HEIGHT="300"> 
+<PARAM NAME=quality VALUE=high> 
+<param name="Play" value="-1"> 
+<PARAM NAME=movie VALUE="http://www.toto369.net/sydm/52.swf"> 
+</OBJECT> 
+</div> 
+<input id="txt" type="text" value=""> 
+<div id="d2" style="visibility:hidden"> 
+flash已经加载完成 
+</div> 
+<script language="javascript"> 
+function ck() 
+{ 
+var mFlash=document.getElementById("mFlash"); 
+var txt=document.getElementById("txt"); 
+txt.value=mFlash.PercentLoaded()+"%" 
+if(txt.value=="100%") 
+{ 
+document.getElementById("d2").style.visibility="visible" 
+clearInterval(timer) 
+} 
+} 
+var timer=setInterval("ck()",1000) 
+</script>

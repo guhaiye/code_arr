@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    </head>
+    <body>
+    <div style='border:1px solid green;width:1000px;'>
+    	<div id='jd' style="width:0;height:50px;background-color:red;"></div>
+    	<div style="width:1000px;text-align:center;position:relative;top:-35px;height:0px;">已同步职位<span id='n1'></span>/<span id='a1'></span>个</div>
+    </div>
+    <div>总数：<input type="text" id='all' name=''></div>
+    <div>当前：<input type="text" id='now' name=''></div>
+    </body>
+    <script language="JavaScript" src="jquery-1.8.3.min.js"></script>
+    <script>
+
+    $('#now').blur(function(){
+    	var all = parseInt($('#all').val());
+    	var now = parseInt($('#now').val());
+    	if(now > all){
+    		now = all;
+    	}
+    	var width =1000 * now/all;
+    	$('#jd').css('width',width);
+    	$('#n1').text(now);
+    	$('#a1').text(all);
+    });
+    </script>
+</html>

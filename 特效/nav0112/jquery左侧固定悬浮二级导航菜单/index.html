@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jquery左侧固定悬浮二级导航菜单</title>
+<link href="css/lanrenzhijia.css" type="text/css" rel="stylesheet" />
+<script src="js/jquery.min.js"></script>
+<script>
+$(function (){
+  $(".left_nav dd").hover(function(){
+  $(".nav_right",this).show();
+  });
+  $(".left_nav dd").mouseleave(function(){
+  $(".nav_right",this).hide();
+  });
+   $(".nav_right a").click(function(){
+      var a=$(this).text();
+      $("#choice_result").html(a);
+     });    
+});
+</script>
+</head>
+<body style="height:2000px;">
+<!-- 代码begin -->
+  <div class="left_nav">
+    <dl>
+    <dd><a href="javascript:" class="nav_left">玉石</a><div class="nav_right"><a href="javascript:">木雕</a><a href="javascript:">木雕3</a><a href="javascript:">木雕2</a></div></dd>
+    </dl>
+  </div>
+  <div id="choice_result"></div>
+<!-- 代码end -->
+</body>
+</html>

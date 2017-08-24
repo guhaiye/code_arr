@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    </head>
+    <body>
+    删除数组中指定元素，不知道元素下标
+    </body>
+    <script language="JavaScript" src="jquery-1.8.3.min.js"></script>
+    <script>
+      $(function(){
+        var arr = ['a','b','c','d'];
+        console.log($.inArray('c',arr));
+        arr.splice($.inArray('a',arr),1);
+        console.log(arr);
+      });
+    </script>
+</html>

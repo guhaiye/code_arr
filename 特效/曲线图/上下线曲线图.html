@@ -1,0 +1,31 @@
+    <!doctype html>  
+    <html lang="en">  
+    <head>  
+      <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>  
+      <script src="http://code.highcharts.com/highcharts.js"></script>
+      <script>  
+       $(function () {
+        $('#container').highcharts({
+            xAxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            },
+            yAxis:{
+                plotLines: [{
+                    color: '#FF0000',
+                    width: 2,
+                    value: 100 
+                }]
+            },
+            series: [{
+                data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+            }]
+        });
+     });
+    
+      </script>  
+    </head>  
+    <body>  
+      <span style="white-space:pre">                </span>  
+      <div id="container" style="min-width:700px;height:400px"></div>  
+    </body>  
+    </html>  

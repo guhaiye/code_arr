@@ -1,0 +1,21 @@
+<script   language=javascript><!--  
+      document.write('<div id=loadDiv style="padding-top:100; padding-left: 450">'+'页面正在载入，请等待<span id="loading"></span></div>');  
+      var   setInterval1= setInterval("loading.innerText +='.'",300);  
+      var   setInterval2 = setInterval("loading.innerText = ''",15000);  
+      function   window.onload()  
+      {  
+            hiddenDiv.style.display="";   //页面载入代码  
+            loadDiv.removeNode(true);  
+            clearInterval(setInterval1);  
+            clearInterval(setInterval2);  
+      }  
+      //   --></script>  
+
+<div id=hiddenDiv style="display:none"></div>
+<body style="margin:0px;padding:0px;font-size:12px;overflow-y:hidden;z-index:0;" >   
+
+  <iframe src="http://processee.cn" width="100%" height="100%" frameborder="0" marginwidth="0" marginheight="0"></iframe>  
+
+   
+
+</body>

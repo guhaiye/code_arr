@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>jQuery焦点图带缩略图选项卡特效</title>
+
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/scrollable.js"></script>
+
+</head>
+<body>
+<br>
+
+<div class="c1_l">
+	<div class="c1_slide" id="c1_slide">
+		<ul>
+			<li>
+				<a href="http://www.17sucai.com/"><img src="images/datouwang1.jpg" alt="唐嫣糖水美肌大片 犹如鲜果般娇嫩"></a>
+				<span>【xw素材网】唐嫣"糖水美肌"大片 犹如鲜果般娇嫩</span>
+			</li>
+			<li>
+				<a href="http://www.17sucai.com/"><img src="images/datouwang2.jpg" alt="维秘天使的暴力同性诱惑"></a>
+				<span>【xw素材网】维秘天使的暴力同性诱惑</span>
+			</li>
+			<li>
+				<a href="http://www.17sucai.com/"><img src="images/datouwang3.jpg" alt="《唐顿庄园》大小姐登《InStyle》2014年2月刊"></a>
+				<span>【xw素材网】《唐顿庄园》大小姐登《InStyle》2014年2月刊</span>
+			</li>
+			<li>
+				<a href="http://www.17sucai.com/"><img src="images/datouwang4.jpg" alt="众超模真空拍广告 2014新款牛仔系列广告"></a>
+				<span>【xw素材网】众超模真空拍广告 2014新款牛仔系列广告</span>
+			</li>
+			<li>
+				<a href="http://www.17sucai.com/"><img src="images/datouwang5.jpg" alt="我的美丽生活 时尚重塑生活"></a>
+				<span>【xw素材网】我的美丽生活 时尚重塑生活</span>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="c1_paging">
+		<ul id="c1_paging">
+			<li class="active"><i></i><img src="images/datouwang1_s.jpg" width="110" height="65"><b></b></li>
+			<li><i></i><img src="images/datouwang2_s.jpg" width="110" height="65"><b></b></li>
+			<li><i></i><img src="images/datouwang3_s.jpg" width="110" height="65"><b></b></li>
+			<li><i></i><img src="images/datouwang4_s.jpg" width="110" height="65"><b></b></li>
+			<li><i></i><img src="images/datouwang5_s.jpg" width="110" height="65"><b></b></li>
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+$("#c1_slide").scrollable({circular:true}).autoscroll({autoplay:true,interval:5000}).navigator("#c1_paging");
+</script>
+
+</body>
+</html>

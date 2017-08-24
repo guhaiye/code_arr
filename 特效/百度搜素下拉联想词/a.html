@@ -1,0 +1,79 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+ <meta charset="utf-8" />
+ <title>jQuery UI Autocomplete - Default functionality</title>
+ <link rel="stylesheet" href="jquery_ui.css" />
+ <script src="jquery-1.10.2.min.js"></script>
+ <script src="jquery_ui.js"></script>
+
+ <script>
+ $(function() {
+  var availableTags = [
+  "中国",
+  "AppleScript",
+  "Asp",
+  "BASIC",
+  ];
+
+  // $( "#tags1" ).autocomplete({
+  //  source: availableTags,
+  //  select: function( event, ui ) {
+  //       // var a_id=ui.item.value;
+  //       var a_id=ui.item.label;
+  //       console.log(a_id);
+  //     }
+  // });
+  // $( "#tags1" ).autocomplete({
+  //   source: availableTags,
+  //   select: function( event, ui ) {
+  //      var a_id=$(this).val()
+  //      console.log(a_id);
+  //   },
+  // });
+   var projects = [
+      {
+        value: "1",
+        label: "jQuery",
+      },
+      {
+        value: "2",
+        label: "jQuery UI",
+      },
+      {
+        value: "3",
+        label: "Sizzle JS",
+      }
+    ];
+ 
+    $( "#project" ).autocomplete({
+      source: projects,
+      focus: function( event, ui ) {
+        $( "#project" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+        $( "#project" ).val( ui.item.label );
+        $( "#project-id" ).val( ui.item.value );
+        
+        return false;
+      }
+    })
+   .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+      return $( "<li>" ).append( "<a>" + item.label + "</a>" ).appendTo( ul );
+    };
+
+ });
+</script>
+</head>
+<body>
+<!--  <div class="ui-widget">
+  <label for="tags">Tags: </label>
+  <input id="tags1" />
+
+ </div> -->
+ <input id="project">
+ <input type="hidden" id="project-id">
+</body>
+</html>

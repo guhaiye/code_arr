@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>基于Raphael.js的svg多功能地图插件 - 【科e互联】</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/lib/raphael-min.js"></script>
+<script type="text/javascript" src="js/res/chinaMapConfig.js"></script>
+<script type="text/javascript" src="js/res/worldMapConfig.js"></script>
+<script type="text/javascript" src="js/map.js"></script>
+<!-- <script type="text/javascript" src="js/echarts.min.js"></script>
+ --><script type="text/javascript" src="js/highcharts.js"></script>
+ <script type="text/javascript" src="js/exporting.js"></script>
+<script type="text/javascript">
+$(function(){
+     
+	// $.ajax({
+	// 	url: projectName+'/idea123Action.do?method=getIdea123MapData&reportName='+reportName,
+	// 	data: data,
+	// 	dataType: 'json',
+	// 	success: function(data){
+
+	var data = {"jiangsu":{"value":"30.05%","index":"1","stateInitColor":"0"},"henan":{"value":"19.77%","index":"2","stateInitColor":"0"},"anhui":{"value":"10.85%","index":"3","stateInitColor":"0"},"zhejiang":{"value":"10.02%","index":"4","stateInitColor":"0"},"liaoning":{"value":"8.46%","index":"5","stateInitColor":"0"},"beijing":{"value":"4.04%","index":"6","stateInitColor":"1"},"hubei":{"value":"3.66%","index":"7","stateInitColor":"1"},"jilin":{"value":"2.56%","index":"8","stateInitColor":"1"},"shanghai":{"value":"2.47%","index":"9","stateInitColor":"1"},"guangxi":{"value":"2.3%","index":"10","stateInitColor":"1"},"sichuan":{"value":"1.48%","index":"11","stateInitColor":"2"},"guizhou":{"value":"0.99%","index":"12","stateInitColor":"2"},"hunan":{"value":"0.78%","index":"13","stateInitColor":"2"},"shandong":{"value":"0.7%","index":"14","stateInitColor":"2"},"guangdong":{"value":"0.44%","index":"15","stateInitColor":"2"},"jiangxi":{"value":"0.34%","index":"16","stateInitColor":"3"},"fujian":{"value":"0.27%","index":"17","stateInitColor":"3"},"yunnan":{"value":"0.23%","index":"18","stateInitColor":"3"},"hainan":{"value":"0.21%","index":"19","stateInitColor":"3"},"shanxi":{"value":"0.11%","index":"20","stateInitColor":"3"},"hebei":{"value":"0.11%","index":"21","stateInitColor":"4"},"neimongol":{"value":"0.04%","index":"22","stateInitColor":"4"},"tianjin":{"value":"0.04%","index":"23","stateInitColor":"4"},"gansu":{"value":"0.04%","index":"24","stateInitColor":"4"},"shaanxi":{"value":"0.02%","index":"25","stateInitColor":"4"},"macau":{"value":"0.0%","index":"26","stateInitColor":"7"},"hongkong":{"value":"0.0%","index":"27","stateInitColor":"7"},"taiwan":{"value":"0.0%","index":"28","stateInitColor":"7"},"qinghai":{"value":"0.0%","index":"29","stateInitColor":"7"},"xizang":{"value":"0.0%","index":"30","stateInitColor":"7"},"ningxia":{"value":"0.0%","index":"31","stateInitColor":"7"},"xinjiang":{"value":"0.0%","index":"32","stateInitColor":"7"},"heilongjiang":{"value":"0.0%","index":"33","stateInitColor":"7"},"chongqing":{"value":"0.0%","index":"34","stateInitColor":"7"}};
+			var i = 1;
+			for(k in data){
+				if(i <= 12){
+					var _cls = i < 4 ? 'active' : ''; 
+					$('#MapControl .list1').append('<li name="'+k+'"><div class="mapInfo"><i class="'+_cls+'">'+(i++)+'</i><span>'+chinaMapConfig.names[k]+'</span><b>'+data[k].value+'</b></div></li>')
+				}else if(i <= 24){
+					$('#MapControl .list2').append('<li name="'+k+'"><div class="mapInfo"><i>'+(i++)+'</i><span>'+chinaMapConfig.names[k]+'</span><b>'+data[k].value+'</b></div></li>')
+				}else{
+					$('#MapControl .list3').append('<li name="'+k+'"><div class="mapInfo"><i>'+(i++)+'</i><span>'+chinaMapConfig.names[k]+'</span><b>'+data[k].value+'</b></div></li>')
+				}
+			}
+
+			var mapObj_1 = {};
+			var stateColorList = ['003399', '0058B0', '0071E1', '1C8DFF', '51A8FF', '82C0FF', 'AAD5ee', 'AAD5FF'];
+			
+			$('#RegionMap').SVGMap({
+				external: mapObj_1,
+				mapName: 'china',
+				mapWidth: 350,
+				mapHeight: 350,
+				stateData: data,
+				// stateTipWidth: 118,
+				// stateTipHeight: 47,
+				// stateTipX: 2,
+				// stateTipY: 0,
+				stateTipHtml: function (mapData, obj) {
+					var _value = mapData[obj.id].value;
+					var _idx = mapData[obj.id].index;
+					var active = '';
+					_idx < 4 ? active = 'active' : active = '';
+					var tipStr = '<div class="mapInfo"><i class="' + active + '">' + _idx + '</i><span>' + obj.name + '</span><b>' + _value + '</b></div>';
+					return tipStr;
+				},
+				hoverCallback: function(stateData, obj){
+		           $("#MapControl li").each(function(index){
+		           	 var a_name=$(this).attr('name');
+		           	 if(obj.id == a_name){
+		           	 	$(this).addClass('select');
+		           	 }else{
+		           	 	$(this).removeClass('select');
+		           	 }
+		           });
+		        }
+			});
+			$('#MapControl li').hover(function () {
+				var thisName = $(this).attr('name');
+				var thisHtml = $(this).html();
+				$('#MapControl li').removeClass('select');
+				$(this).addClass('select');
+				$(document.body).append('<div id="StateTip"></div');
+				$('#StateTip').css({
+					left: $(mapObj_1[thisName].node).offset().left - 50,
+					top: $(mapObj_1[thisName].node).offset().top - 40
+				}).html(thisHtml).show();
+				mapObj_1[thisName].attr({
+					fill: '#E99A4D'
+				});
+			}, function () {
+				var thisName = $(this).attr('name');
+
+				$('#StateTip').remove();
+				$('#MapControl li').removeClass('select');
+				mapObj_1[$(this).attr('name')].attr({
+					fill: "#" + stateColorList[data[$(this).attr('name')].stateInitColor]
+				});
+			});
+			
+			$('#MapColor').show();
+	// 	}
+	// });
+	// var  option = {
+ //        tooltip : {
+ //            trigger: 'item',
+ //        },
+ //        legend: {
+ //            data:['数据1']
+ //        },
+
+ //        calculable : true,
+ //        xAxis : [
+ //            {
+ //                type: 'value'
+ //            }
+ //        ],
+ //        yAxis : [
+ //            {
+ //               type : 'category',
+ //                data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+ //            }
+ //        ],
+ //        series : [
+ //            {
+ //                type:'bar',
+ //                legendHoverLink:false,
+ //                barWidth:14,
+ //                label:{
+ //                    normal:{
+ //                        show:true,
+ //                        position: 'right',
+ //                        offset: 0,
+ //                        textStyle:{
+ //                            color:'#999',
+ //                            fontSize: 13,
+ //                        },
+ //                        formatter : '{c}',
+ //                    }
+ //                },
+ //                barGap:'30%',
+ //                barCategoryGap:0,
+	//             data:[10, 52, 200, 334, 390, 330, 220]
+ //            },
+ //        ]
+ //    };
+	// // 基于准备好的dom，初始化echarts实例
+	// myChart = echarts.init(document.getElementById('main'));
+	// // 使用刚指定的配置项和数据显示图表。
+	// myChart.setOption(option);
+	$('#container').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: '各洲不同时间的人口条形图'
+        },
+        subtitle: {
+            text: '数据来源: Wikipedia.org'
+        },
+        xAxis: {
+            categories: ['非洲', '美洲', '亚洲', '欧洲', '大洋洲'],
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '人口总量 (百万)',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' 百万'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true,
+                    allowOverlap: true
+                }
+            },
+            series: {
+		        cursor: 'pointer',
+		        events: {
+		            mouseOver: function(e) {
+
+		                // console.log(e.point.category);
+		            },
+		            // mouseOut: function(event) {
+		            //     // alert(this.name +' clicked\n'+'highcharts');
+		            //     // console.log(2);
+		            // },
+		        }
+		    }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: '1800 年',
+            data: [107, 31, 635, 203, 2]
+        }]
+    });
+});
+</script>
+</head>
+<body>
+<!--效果html开始-->
+   
+<div class="items" id="Item9">
+    <div class="itemCon">
+	<style type="text/css">
+	.regionList{float:left; margin-top:15px;}
+	.regionList ul{float:left; width:110px; height:100%; margin-right:5px; display:inline; font-family:"微软雅黑"}
+	.regionList ul li{ height:24px; margin-left:10px; padding:0 0px; border:1px solid #fff; line-height:24px;}
+	.regionList ul li.select{border:1px solid #D3D3D3; background:#FFF1BF}
+
+	.mapInfo i{ display:inline-block; width:15px; height:15px; margin-top:5px; line-height:15px; font-style:normal; background:#aeaeae; color:#fff; font-size:11px; font-family: Tahoma; -webkit-border-radius:15px; border-radius:15px; text-align:center}
+	.mapInfo i.active{background:#E27F21;}
+	.mapInfo span{ padding:0 5px 0 3px;}
+	.mapInfo b{ font-weight:normal; color:#2770B5}
+
+	.regionMap{float:left; margin-left:70px; display:inline;}
+	</style>
+	<div id="Region" style="position:relative; height:360px;">
+		<div class="regionList" id="MapControl">
+			<ul class="list1"></ul>
+			<ul class="list2"></ul>
+			<ul class="list3"></ul>
+		</div>
+		<div class="regionMap" id="RegionMap"></div>
+		<div id="MapColor" style=" display:none; float:left; width:30px; height:180px; margin:80px 0 0 10px; display:inline; background:url(images/map_color.png) center 0;"></div>
+		<div id="main" style="width:400px;height:400px;float:left;margin-left:30px;"></div>
+
+		<div id="container" style="max-width:400px;height:400px;float:left;"></div>
+	</div>
+    	
+       
+ </div>
+
+
+<link rel="stylesheet" type="text/css" href="css/SyntaxHighlighter.css">
+<!--效果html结束-->
+<div class="clear"></div>
+</div>
+
+</body>
+</html>

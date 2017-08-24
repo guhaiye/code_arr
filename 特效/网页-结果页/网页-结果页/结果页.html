@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Cache-Control" content="no-cache">
+<link type="text/css" rel="stylesheet" href="style/css/style.css">
+<script type="text/javascript" src="style/js/ichart.js"></script>
+<link rel="stylesheet" href="style/css/demo.css" type="text/css">
+<script type="text/javascript">
+$(function(){
+	var data = [
+		{name : 'a',value : 50,color:'#3d85c0'},
+		{name : 'b',value : 20,color:'#95ba51'},
+		{name : 'c',value : 20,color:'#f19214'},
+		{name : 'd',value : 10,color:'#bf3a33'},
+	];
+		        	
+	new iChart.Column2D({
+		render : 'canvasDiv',
+		data: data,
+		showpercent:true,
+		decimalsnum:2,
+		width : 332,
+		height : 372,
+		coordinate:{
+			background_color:'#fefefe',
+			scale:[{
+				position:'left',	
+				start_scale:0,
+				end_scale:20,
+				scale_space:8,
+				listeners:{
+				parseText:function(t,x,y){
+					return {text:t+"%"}
+				}
+
+			}
+	}]
+	}
+	}).draw();
+});				
+</script>
+</head>
+
+<body class="pt">
+	<div class="result_box">
+    	<div class="result_top"> </div>
+        <div class="result_content">
+        	<div class="result_cl"></div>
+            <div class="result_cc">
+            	<p class="title">1. 您所在的科室？</p>	
+                <div class="inves_result">
+                	<!--图表-->
+                    <div class="inves_tb">
+                    	<div id="canvasDiv">
+                            <div id="shell-column2d_5486388902989" style="padding: 0px; margin: 0px auto; overflow: hidden; position: relative; width: 332px; height: 372px;">
+                                <canvas height="372" width="332" id="column2d_5486388902989" style="width: 332px; height: 372px; cursor: default;">
+                                    <p>Your browser does not support the canvas element</p>
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!--图表介绍-->
+                    <ul class="result_bb_text">
+                    	<li>a.心内</li>
+                        <li>b.高干/老年</li>
+                        <li>c.内分泌</li>
+                        <li>d.内科/全科/院医等</li>
+                    </ul>
+                                       
+                </div>
+            </div>
+            <div class="result_cr"></div>
+            
+        </div>
+        <div class="result_bot"> </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>基于Raphael.js的svg多功能地图插件 - 【科e互联】</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/lib/raphael-min.js"></script>
+<script type="text/javascript" src="js/res/chinaMapConfig_new.js"></script>
+<script type="text/javascript" src="js/map.js"></script>
+<script type="text/javascript" src="js/highcharts.js"></script>
+<script type="text/javascript" src="js/exporting.js"></script>
+<script type="text/javascript">
+$(function(){
+     
+	// $.ajax({
+	// 	url: projectName+'/idea123Action.do?method=getIdea123MapData&reportName='+reportName,
+	// 	data: data,
+	// 	dataType: 'json',
+	// 	success: function(data){
+
+	var data = {"江苏":{"value":"50","stateInitColor":"0"},"河南":{"value":"40","stateInitColor":"0"}};
+
+	var mapObj_1 = {};
+	
+	$('#RegionMap').SVGMap({
+		external: mapObj_1,
+		mapName: 'china',
+		mapWidth: 350,
+		mapHeight: 350,
+		stateData: data,
+		showTip: false,
+		hoverCallback: function(stateData, obj){
+           var map_data=0;
+           var _value;
+           $(data_new).each(function(index){
+           	 if(data_new[index] == obj.id){
+           	 	map_data = 1;
+           	 	_value=stateData[obj.id].value;
+                $("#container").find('.highcharts-series-group').children('g').eq(0).children('rect').eq(index).attr('fill','#0846c4')
+           	 }else{
+           	 	$("#container").find('.highcharts-series-group').children('g').eq(0).children('rect').eq(index).attr('fill','#1daee4')
+           	 }
+           });
+           if(map_data == 1){
+                $(document.body).append('<div id="StateTip"></div');
+				$('#StateTip').css({
+					left: $(mapObj_1[obj.id].node).offset().left - 50,
+					top: $(mapObj_1[obj.id].node).offset().top - 40
+				}).html(obj.id +'<br/>'+ _value +' 个').show();
+				mapObj_1[obj.id].attr({
+					fill: '#0846c4'
+				});
+           }else{
+              $("#StateTip").remove();
+              return false;
+           }
+        },
+	});
+			
+	var data_new=['江苏', '河南'];
+	$('#container').highcharts({
+        chart: {
+            type: 'bar',
+        },
+        xAxis: {
+            categories: data_new,
+            title: {
+                text: null
+            },
+        },
+        title:'',
+        exporting: {
+            enabled:false
+        },
+        legend: {                                                                    
+            enabled: false                                                           
+        },
+        tooltip:{
+        	formatter: function() {
+			var s = '<b>'+ this.x +'</b>'+'：'+this.point.y +'个';
+			return s;
+			} 
+        },
+        yAxis: {
+            min: 0,
+            labels: {
+                overflow: 'justify'
+            },
+            title:{
+            	text:"单位：个",
+            	align:'high'
+            }
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true,
+                    allowOverlap: true
+                }
+            },
+            series: {
+		        cursor: 'pointer',
+		        events: {
+		            mouseOver: function(e) {
+		            	setTimeout(function(){
+		            	   var _name=$("#container").find('.highcharts-tooltip').children('text').children('tspan').eq(0).text();
+		            	   var _text=$("#container").find('.highcharts-tooltip').children('text').children('tspan').last().text().split('：')[1];
+		            	  for(var key in chinaMapConfig.names){
+		            		if(key == _name){
+		            			$(document.body).append('<div id="StateTip"></div');
+								$('#StateTip').css({
+									left: $(mapObj_1[key].node).offset().left - 50,
+									top: $(mapObj_1[key].node).offset().top - 40
+								}).html(_name +'<br/>'+_text).show();
+		            			mapObj_1[key].attr({
+									fill: '#0846c4'
+								});
+								var arr_index=$.inArray(_name,data_new);
+								$("#container").find('.highcharts-series-group').children('g').eq(0).children('rect').eq(arr_index).attr('fill','#0846c4');
+		            		}
+		            	  }
+		            	},5);
+
+		            },
+		            mouseOut: function(event) {
+		            	setTimeout(function(){
+		            		var _name=$("#container").find('.highcharts-tooltip').children('text').children('tspan').eq(0).text();
+		            		for(var key in chinaMapConfig.names){
+		            			if(key == _name){
+					                $('#StateTip').remove();
+									mapObj_1[key].attr({
+										fill: "#1daee4"
+									});
+								}
+						    }
+                        },5);
+		           },
+		        }
+		    }
+        },
+        credits: {
+            enabled: false
+        },
+   
+        series: [{
+            name: '',
+            data: [50, 40],
+            color:'#1daee4'
+        }]
+    });
+});
+</script>
+</head>
+<body>
+<!--效果html开始-->
+   
+<div class="items" id="Item9">
+    <div class="itemCon">
+	<div id="Region" style="position:relative; height:360px;">
+		<div class="regionList" id="MapControl">
+			<ul class="list1"></ul>
+			<ul class="list2"></ul>
+			<ul class="list3"></ul>
+		</div>
+		<div class="regionMap" id="RegionMap"></div>
+		<div id="MapColor" style="float:left; width:30px; height:180px; margin:80px 0 0 10px;background:url(images/map_color.png) center 0;display:none;"></div>
+		<div id="main" style="width:400px;height:400px;float:left;margin-left:30px;"></div>
+
+		<div id="container" style="max-width:400px;height:400px;float:left;"></div>
+	</div>
+    	
+       
+ </div>
+
+
+<!--效果html结束-->
+<div class="clear"></div>
+</div>
+
+</body>
+</html>

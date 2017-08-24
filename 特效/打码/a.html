@@ -1,0 +1,236 @@
+
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>填写验证码</title>
+<link rel="stylesheet" href="captcha.css">
+<style type="text/css">
+    body { margin: 0; padding: 0; font-family: simsun; font-size: 12px;background-color: #ddd; }
+    .login-box {width: 310px; margin: 100px auto 0; }
+    .login-box-title {
+        padding: 10px;
+        font-weight: 500;
+        line-height: 20px;
+        font-family: '微软雅黑';
+        font-size: 12px;
+    }
+    .tips{color:red;font-size: 12px;float: right;}
+    #net_error{display: none;}
+</style>
+</head>
+<body>
+	<div class="login-box">
+		<span id="net_error" class=".tips">网络连接错误，请刷新页面再试！</span><br/>
+		<span class="options">
+			<span id="sin"></span>
+			<input type="button" id="tFlagBtn" value="点击获取验证码"/>
+		</span>
+        <div class="login-box-title">点完验证码感觉整个人都舒服了呢！</div>
+        <div class="captcha" id="captcha">
+            <div class="captcha-container">
+                <div class="captcha-header">
+                    <span class="txt">请顺序点击大图中的文字</span>
+                    <div class="captcha-sm-img" id="captcha-sm-img">
+                    </div>
+                </div>
+                <div class="captcha-body" id="captcha-body">
+                    <div class="captcha-img-sprites" id="captcha-img-sprites">
+                       <!--加载过来的图片-->
+
+                    </div>
+                </div>
+                <div class="captcha-footer">
+                    <a href="javascript:;" id="captcha-submitCode" class="btn btn-primary btn-disabled">验证</a>
+                    <a href="javascript:;" id="captcha-reload" class="captcha-reload">
+                        <i class="icons icons-reload"></i>
+                    </a>
+                    <span id="captcha-info"></span>
+                </div>
+            </div>
+        </div>
+        <br/><span class="tips">* 调整浏览器后请刷新网页！</span><br/>
+        <br/><span id="result"></span>
+    </div>
+    <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="captcha.js"></script>
+	<script type="text/javascript" src="json.js"></script>
+	<script type="text/javascript"> 
+  
+	  var captchaName,t = new Date().valueOf(),startTime,finishFlag=true,sinFlag = false;
+	  var queryTime = 3000;
+	  var showingMsg = false,taggle;
+	  var loopcount = 0;
+	  var isGetingImg = false;
+	  
+	  $(document).ready(function(){
+		  $("#result").hide();
+		  queryLoop();
+		  // $("#captcha-reload").hide();
+		  // $("#captcha-info").hide();
+		  captcha.setImage('getcap.jpg');
+		  $("#tFlagBtn").click(function(){
+			  
+			  if(!finishFlag){
+				  alert("请先完成当前验证码！");
+				  return;
+			  }
+			  
+			  if(!sinFlag){
+				  alert("暂时还没有验证码需要填写。");
+			  }else{
+				  showingMsg = false;
+				  getImg();
+				  return;
+			  }
+		  });
+
+		  
+		  if (window.Notification && Notification.permission !== "granted") {
+		    Notification.requestPermission(function (status) {
+		      if (Notification.permission !== status) {
+		        Notification.permission = status;
+		      }
+		    });
+		  }
+	  });	
+	  //http://localhost:8080/ZhaopinCheckcode/
+	  function queryLoop(){
+		  $.ajax({
+			  type: "GET",
+			  url: "loopQuery2",
+              success: function (data) {
+            	  var obj = eval ("(" + data + ")");
+            	  if(obj.code==0){
+            		  $("#sin").html(obj.msg);
+            		  $("#sin").attr("style","color:red");
+            		  sinFlag = true;
+            		  loopcount++;
+            		  if(loopcount==5){
+            			  loopcount = 0;
+            			  showingMsg = false;
+            		  }
+            		  showMsg();
+            		  if(!isGetingImg)
+            		  	setTimeout(queryLoop, queryTime);
+            	  }else if(obj.code==1){
+            		  $("#sin").html(obj.msg);
+            		  $("#sin").attr("style","color:green");
+            		  sinFlag = false;
+            		  if(!isGetingImg)
+            		  	setTimeout(queryLoop, queryTime);
+            	  }else{
+            		  alert(obj.msg);
+            	  }
+              },
+              error:function(){
+	      		$("#net_error").show();
+	      	  }
+		  });
+	  }
+	  
+	  function getImg(){
+		  isGetingImg = true;
+		  $.ajax({
+			  type: "GET",
+			  url: "loopQuery?t="+t,
+              success: function (data) {
+            	  isGetingImg = false;
+            	  var obj = eval ("(" + data + ")");
+            	  if(obj.code==0){
+            		  var flag = captchaName!="";
+            		  captchaName = obj.captchaName;
+            		  var src = "getCaptchaImg?name="+captchaName;
+            		  $("#result").hide();
+            		  if(flag){
+            			  captcha.reloadImage(src);
+            		  }else{
+            			  captcha.setImage(src);
+            		  }
+            		  startTime = new Date().valueOf();
+            		  finishFlag = false;
+            	  }else if(obj.code!=1){
+            		  alert(obj.msg);
+            	  }
+              },
+              error:function(){
+            	  $("#net_error").show();
+  	      	  }
+		  });
+	  }
+	  
+	  function showMsg(){
+		    if(showingMsg)
+		    	return;
+		    showingMsg = true;
+		    msg = "有验证码需要填写!";
+		    console.log(msg);
+		    var title = "通知";
+		    var options = {
+	    		icon:"./asset/img/msg_note.jpg",
+		        body:msg
+    	    }
+		    var mNote = new Notification(title,options);
+		    
+		    if (window.Notification && Notification.permission === "granted") {
+		      var n = mNote;
+		      n.onshow = function () { 
+		    	  setTimeout(n.close.bind(n), 10000); 
+		    	}
+		    }else if (window.Notification && Notification.permission !== "denied") {
+		      Notification.requestPermission(function (status) {
+		        
+		    	  if (Notification.permission !== status) {
+		          Notification.permission = status;
+		        }
+		        
+				if (status === "granted") {
+		          var n = mNote;
+		          n.onshow = function () { 
+			    	  setTimeout(n.close.bind(n), 10000); 
+			      }
+		        }else {
+		          alert(msg);
+		        }
+		      });
+		    }else {
+		      alert(msg);
+		    }
+	  }
+		
+	  captcha.initialize(function (data) {
+	      if (data) {
+	          $.ajax({
+	              type: "POST",
+	              url: "setCaptchaResult?captcha_name="+captchaName,
+	              dataType: 'json',
+	              data:data,
+	              success: function (pdata) {
+	            	  if(pdata.code == 0){
+	            		  done = false;
+	            		  finishFlag = true;
+	            	  }
+	            	  
+	            	  $("#result").html("["+getDatetimeString()+"] "+pdata.msg+"<br/>");
+	            	  $("#result").css("color","green");
+	            	  $("#result").show();
+	              },
+	              error:function(){
+	            	  $("#net_error").show();
+	  	      	  }
+	          });
+	      } else {
+	          captcha.error();
+	      }            
+	  });
+	  
+	  function getDatetimeString(){
+		  var date = new Date();
+		  var year = date.getFullYear(),month = date.getMonth(),day = date.getDate();
+		  var h = date.getHours(),m = date.getMinutes(),s = date.getSeconds();
+		  return year+"-"+month+"-"+day+" "+h+":"+m+":"+s;
+	  }
+	</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Annotation Overlay Effect with jQuery</title>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+
+</head>
+
+<body>
+
+	<div id="portfolio" class="portfolio">
+		<div class="portfolio_item">
+			<div class="image_wrap">
+				<img src="images/website1.jpg" alt="Website1"/>
+			</div>
+			<div class="zoom_overlay">
+				<img src="images/website1_notes.png" alt="Website1Notes"/>
+			</div>
+		</div>
+		<div class="portfolio_item">
+			<div class="image_wrap">
+				<img src="images/website2.jpg" alt="Website2"/>
+			</div>
+			<div class="zoom_overlay">
+				<img src="images/website2_notes.png" alt="Website2Notes"/>
+			</div>
+		</div>
+		<div class="portfolio_item">
+			<div class="image_wrap">
+				<img src="images/website3.jpg" alt="Website3"/>
+			</div>
+			<div class="zoom_overlay">
+				<img src="images/website3_notes.png" alt="Website3Notes"/>
+			</div>
+		</div>
+		<div class="portfolio_item">
+			<div class="image_wrap">
+				<img src="images/website4.jpg" alt="Website4"/>
+			</div>
+			<div class="zoom_overlay">
+				<img src="images/website4_notes.png" alt="Website4Notes"/>
+			</div>
+		</div>
+		<div class="portfolio_item">
+			<div class="image_wrap">
+				<img src="images/website5.jpg" alt="Website5"/>
+			</div>
+			<div class="zoom_overlay">
+				<img src="images/website5_notes.png" alt="Website5Notes"/>
+			</div>	
+		</div>
+
+	</div>
+
+
+
+<!-- The JavaScript -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	//main div
+	var $portfolio	= $('#portfolio');
+	
+	//click event for the image : 
+	//show the overlay
+	$portfolio.find('.image_wrap').bind('click',function(){
+		var $elem	= $(this);
+		var $image	= $elem.find('img:first');
+		$image.stop(true)
+			  .animate({
+				'width'	:'400px',
+				'height':'400px'
+			  },250);
+			  
+		//the overlay is the next element
+		var opacity	= '1';
+		if($.browser.msie)
+			opacity	= '0.5'
+		$elem.next()
+			 .stop(true)
+			 .animate({
+				'width'		:'500px',
+				'height'	:'500px',
+				'marginTop'	:'-250px',
+				'marginLeft':'-250px',
+				'opacity'	:opacity
+			},250,function(){
+				//fade in the annotations
+				$(this).find('img').fadeIn();
+			});
+	});
+	
+	//click event for the overlay :
+	//show the image again and hide the overlay
+	$portfolio.find('.zoom_overlay').bind('click',function(){
+		var $elem	= $(this);
+		var $image	= $elem.prev()
+						   .find('img:first');
+		//hide overlay
+		$elem.find('img')
+			 .hide()
+			 .end()
+			 .stop(true)
+			 .animate({
+				'width'		:'400px',
+				'height'	:'400px',
+				'marginTop'	:'-200px',
+				'marginLeft':'-200px',
+				'opacity'	:'0'
+			 },125,function(){
+				//hide overlay
+				$(this).hide();
+			 });
+			 
+		//show image	 
+		$image.stop(true)
+			  .animate({
+				'width':'500px',
+				'height':'500px'
+			  },250);
+	});
+});
+</script>
+
+</body>
+</html>

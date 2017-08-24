@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>数据累加</title>
+	<style type="text/css">
+      *{text-align:center;}
+	</style>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript">
+       function zh(){
+       	  var t=document.getElementsByName("checkbox");
+		  var sum = 0;
+		  for(var i=1;i<t.length+1;i++){
+		       if(document.getElementById("checkbox" + i).checked){
+		          var v = document.getElementById("span" + i).innerText;
+		          if(v=="" || isNaN(v)) 
+		          v = 0;
+		          v = parseFloat(v);
+		          sum += v;    
+		      }
+		   }
+		  sum = Math.round(sum * 10000)/10000;
+		  document.getElementById("span4").innerText=sum;
+       }
+
+	</script>
+</head>
+<body>
+	<form id="form1" name="form1" method="post" action="">
+		<table border="1" cellpadding="0" cellspacing="0" width="600">
+			<tr>
+				<td>
+					选择统计
+				</td>
+				<td>
+					各项金额
+				</td>
+			</tr>
+			<tr>
+			    <td>
+					<input type="checkbox" name="checkbox" id="checkbox1"  onclick="zh()">邮政物流
+				</td>
+				<td>
+					<span id="span1">400</span>
+				</td>
+			</tr>
+			<tr>
+			    <td>
+					<input type="checkbox" name="checkbox" id="checkbox2"  onclick="zh()">区域物流
+				</td>
+				<td>
+					<span id="span2">500</span>
+				</td>
+			</tr>
+			<tr>
+			    <td>
+					<input type="checkbox" name="checkbox" id="checkbox3"  onclick="zh()">区域的
+				</td>
+				<td>
+					<span id="span3">200</span>
+				</td>
+			</tr>
+			<tr>
+			    <td>
+				  <span>综合</span>
+				</td>
+				<td>
+					<span id="span4"></span>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+<script type="text/javascript">
+
+setTimeout("count_down()",1000);//设置每一秒调用一次倒计时函数
+//根据天，时，分，秒的ID找到相对应的元素
+var time_day = document.getElementById("times_day");
+var time_hour = document.getElementById("times_hour");
+var time_minute = document.getElementById("times_minute");
+var time_second = document.getElementById("second");
+var time_end = new Date("2015/06/01 00:00:00");  // 设定活动结束结束时间
+time_end = time_end.getTime();
+//定义倒计时函数
+function count_down(){ 
+   var time_now = new Date();  // 获取当前时间
+   time_now = time_now.getTime();
+   var time_distance = time_end - time_now;  // 时间差：活动结束时间减去当前时间   
+   var int_day, int_hour, int_minute, int_second;   
+ if(time_distance > 0){   
+     // 相减的差数换算成天数   
+     int_day = Math.floor(time_distance/86400000)
+     time_distance -= int_day * 86400000; 
+ // 相减的差数换算成小时
+     int_hour = Math.floor(time_distance/3600000) 
+     time_distance -= int_hour * 3600000;  
+// 相减的差数换算成分钟   
+     int_minute = Math.floor(time_distance/60000)    
+     time_distance -= int_minute * 60000; 
+ // 相减的差数换算成秒数  
+     int_second = Math.floor(time_distance/1000)    
+    // 判断小时小于10时，前面加0进行占位
+    if(int_hour < 10) 
+        int_hour = "0" + int_hour;  
+// 判断分钟小于10时，前面加0进行占位      
+  if(int_minute < 10)    
+   int_minute = "0" + int_minute;  
+ // 判断秒数小于10时，前面加0进行占位 
+  if(int_second < 10) 
+       int_second = "0" + int_second;       
+// 显示倒计时效果       
+time_day.innerHTML = int_day;
+time_hour.innerHTML = int_hour; 
+time_minute.innerHTML = int_minute; 
+time_second.innerHTML = int_second;
+setTimeout("count_down()",1000);
+    }else{
+     var a=parseInt($("#span1").html());
+     a=a+200;
+     $("#span1").html(a);
+//指定的结束日期结束后，往后推迟3天，或者称之为：往后加3天
+//在这里可以非常灵活的设置：比如往后推迟2天或往后加2天：2*24*60*60*1000
+//比如往后推迟1天或往后加1天：1*24*60*60*1000
+//比如往后推迟2小时或往后加2小时：2*60*60*1000
+// 比如往后推迟40分钟或往后加40分钟：40*1000这里设置根据大家需要，灵活设置。
+ time_end=time_end+1*24*60*60*1000;
+setTimeout("count_down()",1000); 
+   }
+}
+	 $(function(){
+	    var t=$("input[type=checkbox]");
+	    for(var i=1;i<t.length+1;i++){
+          $("#span" + i).css('display','none');
+	    }	 
+	     $("input[type=checkbox]").click(function(){
+     	   var ids =$(this).attr("id");
+     	   var i =ids.split("checkbox");
+     	   $("#span"+i[1]).css("display","block");
+     	   $("#span4").css('display','block');
+	     })
+       // $('#span1').css('display','none');
+       // $('#span2').css('display','none');
+       // $('#span3').css('display','none');
+       // $("#checkbox1").click(function() {
+       // 	  $('#span1').css('display','block');
+       // });
+       // $("#checkbox2").click(function() {
+       // 	  $('#span2').css('display','block');
+       // });
+       // $("#checkbox3").click(function() {
+       // 	  $('#span3').css('display','block');
+       // });
+      })
+</script>
+ 
+</html>

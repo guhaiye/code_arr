@@ -1,0 +1,48 @@
+/*global*/
+/* Global */
+html{width:100%;
+	 height:100%;
+	-ms-text-size-adjust:none;
+	-webkit-text-size-adjust:none;
+	-moz-text-size-adjust:none;
+	-o-text-size-adjust:none;
+}
+
+body{margin:0;
+	 padding:0;
+	 width:100%;
+	 height:100%;
+	 background:#47c9af;;
+	 color:#74777b;
+	 font-weight:500;
+	 font-size:1em;
+	 font-family:'Raleway', Arial, sans-serif;
+}
+
+ul{list-style:none;
+   padding:0;
+   margin:0;}
+
+a:link,a:visited{text-decoration:none;
+	             outline:none;}
+
+
+*, *:after, *:before{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box; }
+
+.clearfix:before,.clearfix:after{ content: ''; display:block;}
+.clearfix:after { clear: both; }
+
+.nav{width:820px;height:30px;margin:200px auto 0px;font-weight:300;}
+.nav ul li{display:inline-block;font-size:24px;margin:0 1em;position:relative;}
+.nav ul li a{display:inline-block;font-weight:700;padding:0.15em 0.25em 0;}
+.nav a{color:rgba(0,0,0,0.3);}
+.nav a:hover,.nav a:focus{color:#fff;}
+.tooltip{display:inline-block;position:relative;}
+.tooltip-content{position:absolute;margin-bottom:5px;width:80px;height:80px;border-radius:50%;background:#fff;left:50%;margin-left:-40px;bottom:100%;text-align:center;padding-top:25px;color:#47c9af;cursor:default;pointer-events:none;opacity:0;}
+.tooltip-content::after {content:'';width: 30px;height: 20px;background: url(../img/tooltip1.svg) no-repeat center center;background-size:100%;position:absolute;top:100%;left:50%;margin:-7px 0 0 -15px;}
+.tooltip:hover .tooltip-content{opacity:1;}
+.tooltip-effect-1 .tooltip-content{transform:translate3d(0 10px 0) rotate3d(1,1,1,45deg);transform-origin:50% 100%;transition:opacity 0.3s,transform 0.3s;}

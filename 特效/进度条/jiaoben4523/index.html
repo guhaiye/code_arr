@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+
+<title>jQuery百分比进度条动画效果 - 站长素材</title>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.myProgress.js"></script>
+
+<link rel="stylesheet" href="css/myProgress.css">
+
+</head>
+<body>
+<center><br>
+
+<div class="progress-out" id="div4">
+    <div class="percent-show"><span>0</span>%</div>
+    <div class="progress-in"></div>
+</div>
+<br/>
+</center>
+
+<script>
+    $(function () {
+        $("#div1").myProgress({speed: 1000, percent: 30, width: "100px", height: "10px"});
+        $("#div2").myProgress({speed: 500, percent: 100});
+        $("#div3").myProgress({speed: 4000, percent: 50,width: "500px"});
+        $("#div4").myProgress({speed: 1000, percent: 1});
+    });
+</script>
+
+</body>
+</html>

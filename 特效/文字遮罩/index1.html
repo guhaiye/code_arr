@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+      .lev{width:200px;height:200px;background:blue;}
+      .zz{width:200px;height:200px;background:white;opacity:0.9;position:absolute;display: none;}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+      $(".lev").hover(function(){
+      	var lev2time=setTimeout(function(){
+      	 $(".zz").fadeIn(100);
+      	},100);
+      },function(){
+        $(".zz").fadeOut(100);
+      });
+     });
+	</script>
+</head>
+<body>
+	<div class="lev">
+	  <div class="zz">
+		超声波黄蜂
+	  </div>
+	</div>
+</body>
+</html>

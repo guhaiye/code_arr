@@ -1,0 +1,42 @@
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">  
+    <html>  
+        <head>  
+            <meta charset="utf-8" />  
+            <title>scroll</title> 
+            <script type="text/javascript" src="jquery.js"></script> 
+            <script type="text/javascript">
+              function show_choice(){
+                var r=confirm("press button");
+                if(r==true){
+                    alert("you pressed ok");
+                }else{
+                    alert("you pressed cancel");
+                }
+              }
+              function show_append(){
+                var a=document.getElementById("addCl");
+                var textnode=document.createTextNode("water");
+                a.insertBefore(textnode,null)
+              }
+              $(function(){
+                $("#addBe").click(function() {
+                  $(this).append('Some text');
+                  $(this).prepend('Some text')
+                });
+              });
+            </script> 
+            <style type="text/css">
+              .aaa{background-color:#eeeeee;border:1px solid #ddd;height:26px;cursor:not-allowed;}
+            </style>
+        </head>  
+    <body>  
+       <input type="button" onclick="show_choice()" value="选 择">
+       <div id="addCl" onclick="show_append()">
+           单色付款对本文
+       </div>
+       <div id="addBe">
+          dalfnfnofew
+       </div>
+       <input type="text" readonly="true" value="daqfqf" class="aaa">
+    </body>  
+    </html>  

@@ -1,0 +1,1 @@
+http://polymer.github.io/core-icons/components/core-icons/demo.html

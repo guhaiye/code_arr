@@ -1,0 +1,24 @@
+18种CSS3提交按钮loading加载效果，水平填充、垂直填充等多种2D和3D效果。如果浏览器不支持的话，会退化成fill horizontal。兼容主流浏览器，懒人图库推荐下载！
+
+使用方法：
+1、head区域引用文件css文件及js库
+2、在文件中加入如下button标签，不同的data-style属性对应不同效果
+<button class="progress-button" data-style="top-line" data-horizontal>Submit</button>
+3、复制font文件夹
+4、调用具体某一个按钮的时候，在页面引入以下js, bttn是一个DOM对象
+        new ProgressButton( bttn, {
+        callback : function( instance ) {
+            var progress = 0,
+            interval = setInterval( function() {
+            progress = Math.min( progress + Math.random() * 0.1, 1 );
+            instance._setProgress( progress );
+
+            if( progress === 1 ) {
+                instance._stop(1);
+                clearInterval( interval );
+            }
+            }, 200 );
+        }
+        } );
+		
+*更多代码请访问：懒人图库 www.lanrentuku.com/js/

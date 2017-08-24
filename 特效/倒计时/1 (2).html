@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jquery</title>
+<script src="jquery.js"></script>
+<script src="jquery-1.5.1.min.js"></script>
+<style>
+	a:hover{opacity:0.85;}
+	.tupian:hover{box-shadow:0 0 6em 1em red inset;transition:all 0.2s ease-out 0s;}
+</style>
+</head>
+<body>
+ <div class="main">
+  <button id="show_hide">点击我</button>
+  <div id="main_content">
+	维金
+	工作地点：
+	上海,北京
+	薪资待遇：
+	8000-16000
+	更新时间：
+	2015-06-151
+  </div>
+  <div id="fade_in">
+            维金
+	工作地点：
+	上海,北京
+  </div>
+  <dl>
+  <dt>term 1</dt>
+  <dd>definition 1-a</dd>
+  <dd>definition 1-b</dd>
+  <dd>definition 1-c</dd>
+  <dd>definition 1-d</dd>
+
+  <dt id="term-2">term 2</dt>
+  <dd>definition 2-a</dd>
+  <dd>definition 2-b</dd>
+  <dd>definition 2-c</dd>
+
+  <dt>term 3</dt>
+  <dd>definition 3-a</dd>
+  <dd>definition 3-b</dd>
+</dl>
+ </div>
+ <div class="selected">
+   <p class="selected">hello</p>
+   <p>world</p>
+   <p class="selected">hello world</p>
+ </div>
+ <div class="tupian">
+  <a href=""><img src="a.jpg"></a>
+ </div>
+ <figure>
+   <figcaption>黄浦江上的铁索桥</figcaption>
+   <img src="a.jpg" alt="" />
+ </figure>
+</body>
+<script>
+  $("#show_hide").toggle(function(){
+  	$("#main_content").hide();
+  },function(){
+  	$("#main_content").show();
+  });
+  $("#fade_in").fadeToggle("slow");
+  $("#term-2").prevUntil("dt").css('background-color','red');
+  var a=$("p").siblings(".selected").text();
+</script>
+</html>

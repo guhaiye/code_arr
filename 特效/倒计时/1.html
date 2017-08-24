@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+  <style type="text/css">
+    .content{width:1000px;display: inline-block;}
+    .left{width:500px;display:inline-block;}
+    .right{width:500px;display:inline-block;}
+  </style>
+<script type="text/javascript">
+	function Math_Click(){
+	           var rusult=0;
+	           var check_array=document.getElementsByName("check");
+	           for(var i=0;i<check_array.length;i++)
+	           {
+	               if(check_array[i].checked==true)
+	               {         
+	                  rusult=parseInt(rusult)+parseInt(check_array[i].value);
+	               }
+	           }
+	           alert(rusult);
+	        }
+	        function c(){
+	   var sum = 0;
+	  for(var i=1;i<3;i++){
+	       if(document.getElementById("checkbox" + i).checked){
+	             var v = document.getElementById("textfield" + i).value;
+	          if(v=="" || isNaN(v)) v = 0;
+	         v = parseFloat(v);
+	          sum += v;
+	      }
+	   }
+	   sum = Math.round(sum * 10000)/10000;
+	     document.getElementById("textfield3").value = sum;
+	 }
+	 function sa(obj){
+	     for(var i=1;i<3;i++){
+	         document.getElementById("checkbox" + i).checked = obj.checked;
+	   }
+	     c();
+	 }
+</script>
+</head>
+<body>
+	<div class="content">
+    <div class="left">
+      <input type="checkbox" value="1" name="check"/>商品
+      <input type="checkbox" value="2" name="check"/>商店
+      <input type="checkbox" value="3" name="check"/>药品
+      <input type="checkbox" value="4" name="check"/>药店
+      <input type="checkbox" value="5" name="check"/>蜂蜜
+    </div>
+    <div class="right">
+      <span>600</span>
+      <span>500</span>
+      <span>400</span>
+      <span>300</span>
+      <span>200</span>
+    </div>
+  </div>
+  <div class="content"><input type="button" value="求和" onclick="Math_Click()"/></div>
+  <p>
+ <input type="checkbox" name="checkbox3" id="checkbox3" onclick="sa(this);"/>
+ 全选
+ <label>
+   <input type="text" name="textfield3" id="textfield3" value="0"/>
+  </label>
+</p>
+ <form id="form1" name="form1" method="post" action="">
+<label>
+ <input type="checkbox" name="checkbox1" id="checkbox1" onclick="c()"/>快乐
+  </label>
+  <label>
+ <input name="textfield1" type="text" id="textfield1" value="1" />
+  </label>
+<p>
+ <label>
+  <input type="checkbox" name="checkbox2" id="checkbox2"  onclick="c()"/>无限
+ </label>
+ <label>
+ <input name="textfield2" type="text" id="textfield2" value="2" />
+ </label>
+ </p>
+ </form>
+</body>
+
+</html>

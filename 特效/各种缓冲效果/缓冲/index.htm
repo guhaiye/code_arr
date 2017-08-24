@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+  <title>Bootstrap3按钮加载中效果</title> 
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> 
+  <link rel="stylesheet" type="text/css" href="css/ladda-themeless.css" /> 
+  <style type="text/css"></style>
+ </head> 
+ <body> 
+  <div class="container"> 
+   <div class="row" id="wallcontent"> 
+    <!-- <article class="col-md-2 col-sm-3 col-xs-4">
+     <a href="http://dribbble.com/shots/2056664-Meteor" target="_blank" class="linkc"><img class="img-responsive" src="index_data/meteor_teaser.jpg" alt="Meteor" /></a>
+    </article> -->
+   </div> 
+   <br /> 
+   <div id="row"> 
+    <button type="button" class="btn btn-primary btn-lg ladda-button center-block" id="showmore" title="" data-style="zoom-in"> 
+      <span class="ladda-label">更多</span> 
+      <span class="ladda-spinner"></span>
+      <div style="width: 106px;" class="ladda-progress"></div>
+    </button> 
+   </div> 
+   <br /> 
+  
+  </div> 
+  <script type="text/javascript" src="js/jquery-1.js"></script> 
+  <script type="text/javascript" src="js/jquery.js"></script> 
+  <script src="js/bootstrap.js"></script> 
+  <script src="js/spin.js"></script> 
+  <script src="js/ladda.js"></script> 
+  <script src="js/respond.js"></script> 
+  <script type="text/javascript">
+			$(document).ready(function(){
+			  //定义相关变量
+			  var $wallcontent = $('#wallcontent'), pagenum=1,  $showmore = $('#showmore');
+			  
+			  function loadshots() {
+				var l = Ladda.create(this);
+				l.start();
+				l.setProgress( 0.1 );
+				
+				$showmore.find('.ladda-label').text('loading...');
+				
+				//调用jdribbble相关API获取远程数据内容
+				$.jribbble.getShotsByList('popular', function(data){
+				
+				  var items = [];
+				  
+				  $.each(data.shots, function(i, shot){
+					items.push('<article class="col-md-6 col-sm-3 col-xs-4">');
+					items.push('<a href="' + shot.url + '" target="_blank" class="linkc">');
+					items.push('<img class="img-responsive" style="width:100%" src="' + shot.image_teaser_url + '" alt="' + shot.title + '">');
+					items.push('</a>');
+					items.push('</article>');
+					l.setProgress(0.1 + 0.02*i);
+				  });
+				  
+				  var newEls = items.join(''), tmpcontent = $(newEls);
+				  
+				  l.setProgress( 0.9 );
+				  //以上代码生成了需要显示的dirbbble设计内容，下面代码中我们将这些内容添加到HTML容器中
+				  $wallcontent.append(tmpcontent);
+				  
+				  $showmore.find('.ladda-label').text('更多');
+				  
+				  l.setProgress( 1 );
+				  l.stop();
+				
+				}, {page:pagenum, per_page:2});
+				
+				pagenum++;
+			  }
+			  
+			  //绑定方法到加载更多按钮
+			  $showmore.bind('click', loadshots);
+			  
+			  $showmore.trigger('click');
+			  
+			});
+		</script> 
+ </body>
+</html>
