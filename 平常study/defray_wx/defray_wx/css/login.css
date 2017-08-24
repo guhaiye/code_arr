@@ -1,0 +1,13 @@
+.login-logo{ width: 100%; margin-top: -1px; padding: 38px 0 40px 0; background: #1368bf;}
+.login-logo img.logo{ display: block; width: 29%; margin: 0 auto;}
+.login-box{ padding: 0 15px;}
+.logo-ul li{ position: relative; padding: 25px 10px 11px 32px;}
+.logo-ul li input{ height: 24px; line-height: 24px; font-size: 16px; color: #091b2d;}
+.logo-ul li.tel{ background: url(../img/login_tel.png) 5px 27px no-repeat; background-size: 13px 20px;}
+.logo-ul li.pass{ background: url(../img/login_pw.png) 5px 28px no-repeat; background-size: 14px 17px;}
+.logo-ul li.sfz{ background: url(../img/login_sfz.png) 5px 26px no-repeat; background-size: 17px 14px;}
+.btn-one button{ display: block; width: 100%; height: 40px; font-size: 18px; color: #fff; background: #1368bf; border-radius: 8px; -moz-border-radius: 8px;}
+.login-forget-text{ padding-top: 25px;}
+.login-forget-text a.underline{ font-size: 16px; color: #1368bf; text-decoration: underline; line-height: 18px;}
+
+.error{ color: #F04D52;}

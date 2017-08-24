@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>LIEHUO.NET</title>
+<script language="javascript" type="text/javascript">
+        function addCustomCheckBox(){
+           var checkBoxName="Checkbox";
+           var c=document.getElementsByName(checkBoxName);
+           for(var k=0;k<c.length;k++){c[k].attachEvent("onclick",hooyesFnX(k));}
+           function hooyesFnX(x){ return function(){for(var l=0;l<c.length;l++){ if(x!=l){c[l].checked=false;}}}}
+        }
+    </script>
+</head>
+<body onload="addCustomCheckBox();">
+<input id="Checkbox1" name="Checkbox" type="checkbox" />男
+<input id="Checkbox2" name="Checkbox" type="checkbox" />女
+<input id="Checkbox3" name="Checkbox" type="checkbox" />火星人
+</body>
+</html><br /><center>如不能显示效果，请按Ctrl+F5刷新本页，更多网页代码：<a href='http://www.veryhuo.com/' title="liehuo.net" target='_blank'>http://www.veryhuo.com/</a></center>

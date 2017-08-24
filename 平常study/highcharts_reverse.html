@@ -1,0 +1,70 @@
+<meta charset="utf-8">
+<script src="jquery-1.10.2.min.js"></script>
+<script src="highcharts.js"></script>
+<script src="exporting.js"></script>
+
+<div id="container" style="min-width:400px;height:400px"></div>
+<script>
+var array=['c','z','g'];
+// var array2=[{x:5000, y:0,z:'c'}, {x:6000, y:3.7,z:'z'}, {x:10000, y:7,z:'g'}];
+var array2=[{x:5000, y:0,z:'c'}, {x:5000, y:3,z:'z'}, {x:5000, y:6,z:'g'}];
+// var array3=[{x:6000, y:1,z:'c'}, {x:7000, y:5,z:'z'}, {x:13000, y:7,z:'g'}];
+$(function(){
+     $('#container').highcharts({
+        chart: {
+            type: 'spline',
+            inverted: true
+        },
+        title: {
+            text: '大气温度和海拔高度关系'
+        },
+        subtitle: {
+            text: '根据标准大气模型绘制'
+        },
+        xAxis: {
+            reversed: false,
+            title: {
+                enabled: true,
+                text: '海拔高度'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value + 'km';
+                }
+            },
+            maxPadding: 0.05,
+            showLastLabel: true
+        },
+        yAxis: {
+            title: {
+                text: '温度'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value + '°';
+                }
+            },
+            lineWidth: 2
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br/>',
+            pointFormat: '{point.x} km: {point.y}°C'
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    enable: false
+                }
+            }
+        },
+        series: [{
+            name: '温度',
+            data: [[0, 15], [10, -50], [20, -56.5], [30, -46.5], [40, -22.1],
+                   [50, -2.5], [60, -27.7], [70, -55.7], [80, -76.5]]
+        }]
+    });
+});
+</script>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id='main' style="width:800px;height:400px;"></div>
+</body>
+<script type="text/javascript" src="echarts.min.js" ></script>
+<script type="text/javascript">
+    var  array1=[120, 182, 101, 134, 0];
+    var  array2=[220, 182, 191, 234, 290];
+	// 指定图表的配置项和数据
+var  option = {
+        tooltip : {
+            trigger: 'item',
+            formatter : function (params) {
+                var s = '<br/>'+ params.value[0] +'<br/>平均薪资：'+ params.value[1] +'<br/>成长时间：'+ params.value[2] +'';
+				return s;
+            }
+        },
+        legend: {
+            data:['数据1']
+        },
+
+        calculable : true,
+        xAxis : [
+            {
+                type: 'value'
+            }
+        ],
+        yAxis : [
+            {
+                type: 'value',
+                axisLine: {
+                    lineStyle: {
+                        color: '#dc143c'
+                    }
+                }
+            }
+        ],
+        series : [
+            {
+                name:'数据1',
+                type:'line',
+                data:[
+                    [1.5, 10,'初级'], [5, 7,'中级'], [8, 8,'中级'], [12, 6,'中级'], [11, 12,'高级'], [16, 9,'中级'], [14, 6,'中级'], [17, 4,'中级'], [19, 4,'中级']
+                ],
+            },
+        ]
+    };
+	// 基于准备好的dom，初始化echarts实例
+	myChart = echarts.init(document.getElementById('main'));
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+</script>
+</html>

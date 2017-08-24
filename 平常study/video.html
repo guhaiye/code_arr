@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset=utf-8>
+<title>audio</title>
+<script>
+onload = function(){
+  ado.addEventListener("timeupdate",function(){
+    
+    if(parseInt(this.currentTime) == 10){
+
+    }
+  });
+  ado.addEventListener("loadedmetadata",function(){
+    this.play();
+  });
+}
+</script>
+</head>
+<body>
+ <video id="ado" src="movie.mp4"  controls autobuffer></video>
+</body>
+</html>

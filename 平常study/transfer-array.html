@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script src="jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+    	// refining(arJsonNesting,arJson);
+    });
+    // var arJsonNesting = [{id:1,name:"zhang3",children:[{id:2,name:"zhang33"},{id:3,name:"zhang44"}]},{id:4,name:"li4"}];//注意有的JSON对象有子对象children  
+    // var arJson = new Array();  
+    // function refining(arJsonNesting,arJson) {//将嵌套的JSON对象遍历出来，转为二维数组  
+    //     for (var i = 0,j = arJson.length; i < arJsonNesting.length; i++) {  
+    //         arJson[j] = {  
+    //             Id:arJsonNesting[i].id  
+    //             ,Name:arJsonNesting[i].name  
+    //         };  
+    //         j++;  
+      
+    //         if(arJsonNesting[i].children){  
+    //             refining(arJsonNesting[i].children,arJson);  
+    //         }  
+    //     }  
+    //     console.log(arJson);
+    //     return arJson;
+    // }  
+    var array1 = [
+		{text:"系统管理",data:[{text:"场景管理",data:[{text:"卖场管理",source:"..ml/tableList.html"},{text:"代理商管理",source:"..ml/tableList.html"}]}]},
+		{text:"管理",data:[{text:"管理",data:[{text:"管理一",source:"..ml/tableList.html"},{text:"管理二",source:"..ml/tableList.html"}]}]},
+	];
+	var array2 = [
+		{text:"系统管理",data:[{text:"场景管理",data:[{text:"卖场管理",source:"..ml/tableList.html"},{text:"商户管理",source:"..ml/tableList.html"}]}]},
+	];
+	var array3 = [
+		{text:"系统管理",data:[{text:"场景管理",data:[{text:"卖场管理1",source:"..ml/tableList.html"},{text:"商户管理",source:"..ml/tableList.html"}]}]},
+	];
+    var t = array1.concat(array2,array3);
+    for (var i in t) {
+        // 这里是var t = [{}]里面的内容，目前只有一个对象
+        for (var j in t[i]) {
+            // 这里是"TopicTypesTid"和"ticketJdinfos"指向的对象
+            if(j=='data'){
+	            for (var x in t[i][j]) {
+	            	// 这里是"TopicTypesTid"和"ticketJdinfos"指向的对象里面中括号数组包含的对象
+                       for (var y in t[i][j][x]) {
+	                    // 这里是"TopicTypesTid"和"ticketJdinfos"指向的对象里面中括号数组包含的对象里面的属性name，tid，city。。。。。
+	                     if(y=='data'){
+
+	                     }
+	                  }
+	            }
+            }
+        }
+    }
+
+</script>
+</html>

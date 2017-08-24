@@ -1,0 +1,46 @@
+<meta charset="utf-8">
+<script src="jquery-1.10.2.min.js"></script>
+<script src="highcharts.js"></script>
+<script src="exporting.js"></script>
+<script src="highcharts_cn.js"></script>
+<div id="container" style="min-width:400px;height:400px"></div>
+<script>
+$(function () {
+    $('#container').highcharts({
+        xAxis: {
+            min: -0.5,
+            max: 5.5
+        },
+        yAxis: {
+            min: 0,
+            labels:{
+                enabled: false
+            },
+        },
+        title: {
+            text: '散点与线性回归线'
+        },
+        series: [{
+            type: 'line',
+            name: '线性回归线',
+            data: [[0, 4.51], [5, 4.51]],
+            marker: {
+                enabled: false
+            },
+            states: {
+                hover: {
+                    lineWidth: 0
+                }
+            },
+            enableMouseTracking: false
+        }, {
+            type: 'scatter',
+            name: '观测值',
+            data: [1, 1.5, 2.8, 3.5, 3.9, 4.2],
+            marker: {
+                radius: 4
+            }
+        }]
+    });
+});
+</script>

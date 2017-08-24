@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo">
+        <p>this is apple</p>
+        <p>this is banana</p>
+        <p>th penpenaple</p>
+    </div>
+</body>
+<script src="jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    var new_text=document.querySelector("#demo");
+    var text_new=$("#demo").get(0);
+    $(document).ready(function(){
+        $("#demo p:contains(is)").css("background-color","#B2E0FF");
+    });
+
+</script>
+</html>

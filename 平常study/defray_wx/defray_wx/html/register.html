@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="UTF-8"/>
+		<meta name="cache-control" content="no-cache" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
+    	<meta name="apple-mobile-web-app-capable" content="yes"/>
+    	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    	<meta name="format-detection" content="telephone=no"/>
+    	<link type="text/css" rel="stylesheet" href="../css/common.css"/>
+    	<link type="text/css" rel="stylesheet" href="../css/login.css" />
+    	<script src="../js/jquery-1.12.4.min.js"></script>
+    	<script src="../js/jquery.validate.js"></script>
+    	<script src="../js/common.js"></script>
+	</head>
+	<body>
+		<div class="header">
+			<a class="hd-back">返回</a>
+			<span class="right-text">已有账号，去登录</span>
+		</div>
+		<div class="login-logo">
+			<img class="logo" src="../img/home_logo.png" />
+		</div>
+		<div class="login-box">
+			<form class="myForm"> 
+				<ul class="logo-ul">
+					<li class="tel">
+						<input type="text" name="tel" placeholder="请输入手机号">
+					</li>
+					<li class="pass">
+						<input type="password" name="pwd" id="pass" placeholder="请输入密码">
+					</li>
+					<li class="pass">
+						<input type="password" name="repwd" placeholder="请输入密码">
+					</li>
+					<li class="pass">
+						<input type="password" name="yzm" placeholder="请输入验证码">
+					</li>
+				</ul>
+				<p></p>
+				<div class="btn-one mt30">
+					<button type="button" class="regste">注册</button>
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript">
+			$(function(){			
+				$(".myForm").validate({
+					errorClass: "valid-error",
+					rules:{
+						tel:{
+							required:true,
+							tel:true
+						},
+						pwd:{
+							required:true,
+						},
+						repwd:{
+							required:true,
+							equalTo:'#pass',
+							
+						},
+						yzm:{
+							required:true
+						}
+					},
+					messages:{
+						tel:{
+						  required: '内容不能为空',
+						  tel:'输入正确的手机号'
+						},
+						pwd:{
+						  required:'密码不能为空',
+						},
+                        repwd:{
+                          required:'内容不能为空',
+                          equalTo:'两次密码输入布依族'
+                        }
+					},
+					 invalidHandler: function(form, validator) {
+				        $.each(validator.invalid,function(key,value){
+				            tmpkey = key;
+				            tmpval = value;
+				            validator.invalid = {};
+				            validator.invalid[tmpkey] = value;
+				            // alert(value);
+				            allert_auto_bomb(value);
+				            return false;
+				        });
+				    },
+					errorPlacement:function(error,element){
+						
+					},
+					errorPlacement:function(error, element) {
+				    },
+				    onkeyup: false,
+				    onfocusout:false,
+				    focusInvalid: true
+				});
+				jQuery.validator.addMethod("tel",function(value,element,param){
+					 var phone = /^((1[0-9][0-9]{1})+\d{8})$/;
+                     return phone.test(value) && param;	
+				});
+				jQuery.validator.addMethod("pwd",function(value,element){
+					var pwdReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6-12}$/;
+					return pwdReg.test(value);
+				});
+			
+				$('.regste').click(function(){
+					$('.myForm').valid();
+				})
+			
+		})			
+		</script>
+	</body>	
+</html>

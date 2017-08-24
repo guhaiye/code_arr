@@ -1,0 +1,73 @@
+<meta charset="utf-8">
+<script src="highcharts.js"></script>
+<script src="exporting.js"></script>
+
+<div id="container" style="min-width: 900px; height: 400px; max-width: 900px; margin: 0 auto"></div>
+<script>
+var array=['c','z','g'];
+// var array2=[{x:5000, y:0,z:'c'}, {x:6000, y:3.7,z:'z'}, {x:10000, y:7,z:'g'}];
+var array2=[{x:5000, y:0,z:'c'}, {x:5000, y:3,z:'z'}, {x:5000, y:6,z:'g'}];
+// var array3=[{x:6000, y:1,z:'c'}, {x:7000, y:5,z:'z'}, {x:13000, y:7,z:'g'}];
+
+ Highcharts.chart('container', {
+    chart: {
+        type: 'spline',
+        inverted: true
+    },
+    title: {
+        text: ''
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        reversed: false,
+        title: {
+            enabled: true,
+            text: ''
+        },
+        labels: {
+            formatter: function () {
+                return this.value;
+            },
+        },
+        maxPadding: 0.05,
+        showLastLabel: true,
+        allowDecimals:false,
+    },
+    yAxis: {
+        title: {
+            text: ''
+        },
+        labels: {
+            formatter: function () {
+                return this.value;
+            },
+            step:2
+        },
+        lineWidth: 2,
+
+    },
+    legend: {
+        enabled: false
+    },
+    tooltip: {
+        // headerFormat: '<b>{series.name}</b><br/>',
+        // pointFormat: '{point.x} km: {point.y}',
+        shared: false,
+		formatter: function() {
+		var s = '<b>'+ this.point.z +'</b>'+'<br/>'+this.point.x +': '+this.point.y +'分<br/>';
+		return s;
+		} 
+    },
+    plotOptions: {
+        series: {
+            pointStart: 2010
+        }
+    },
+    series: [{
+        name: '',
+        data: array2
+    }]
+});
+</script>

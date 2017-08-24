@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+	     var nmenu={"A":[{"Firstname":"gu","Secondname":"hai","Thirdname":"ye"}]}
+        
+         var arrCity = [ { name:"北京", sub:[{name:"东城区"}], type:0 }, { name:"广东", sub:[ { name:"广州", sub:[{name:"越秀区"}], type:0 }, { name:"深圳", sub:[{name:"福田区"}], type:0 }]}];
+         console.log(arrCity);
+        
+         var province = [{
+         	"name":"北京",
+         	"city":[{
+         		"name":"东城区"
+         	}],
+         	"type":0
+         },{
+         	"name":"广东",
+         	"sub":[{
+         		"name":"广州",
+         		"sub":[{
+         			"name":"越秀区",
+         			"type":0
+         		},{
+         		   "name":"福田区",
+         		   "type":1
+         		}],
+         	},{
+         		"name":"深圳",
+         		"type":1
+         	}],
+         	"type":0
+         }]; 
+         console.log(province);
+	});
+</script>
+</html>

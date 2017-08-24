@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="http://www.jb51.net/" />
+<title>脚本之家</title>
+<style type="text/css">
+.father{
+  height:200px;
+  width:200px;
+  border:1px solid blue;
+}
+.blur_img{filter:blur(10px);-webkit-filter:blur(10px);-ms-filter:blur(10px);}
+.blur_img:hover{filter:blur(0px);}
+.a_color{color:#000;}
+</style>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script type="text/JavaScript">
+    $(function () {
+        $('input[name=btnDel]').click(function () {
+            var trNode = $(this).parent().parent();
+            $($(this).parent().parent().nextAll("tr")).each(function () {
+                var a = $(this).find("td").eq(0).text();
+                $(this).find("td").eq(1).text(a - 1);
+                $(this).find("td").eq(0).text(a - 1);
+            });
+            trNode.remove();
+        });
+    });
+</script>
+</head>
+<body>
+<table>
+    <tr>
+        <td>1</td><td>1</td><td>a</td><td>a</td><td>a</td><td>a</td><td><input id="btn1" name="btnDel" type="button" value="删除" /></td>
+    </tr>
+    <tr>
+        <td>2</td><td>2</td><td>b</td><td>b</td><td>b</td><td>b</td><td><input id="btn2" name="btnDel" type="button" value="删除"/></td>
+    </tr>
+    <tr>
+        <td>3</td><td>3</td><td>c</td><td>c</td><td>c</td><td>c</td><td><input id="btn3" name="btnDel" type="button" value="删除"/></td>
+    </tr>
+    <tr>
+        <td>4</td><td>4</td><td>d</td><td>d</td><td>d</td><td>d</td><td><input id="btn4" name="btnDel" type="button" value="删除"/></td>
+    </tr>
+</table>
+<img src="index.jpg" alt="" class="blur_img">
+<div class="a_color" id="color_import" style="color:red">看优先级</div>
+</body>
+</html>
+<script type="text/javascript">
+    $(function(){
+        $("#color_import").css('color','blue');
+    });
+</script>

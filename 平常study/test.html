@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery-1.10.2.min.js"></script>  
+    <script language="javascript">    
+       $(function() {    
+         $(window).scroll(function(){    
+            var point = getObjWh1( "fd" );    
+            $('#pos').html('x:'+point.x+',<br>y:'+point.y);  
+            $('#fd').css( { position: "relative" , left: point.x , top:point.y  } );    
+        });    
+       });     
+         
+       function getObjWh1(obj){    
+          var point={};    
+          var st=$(document).scrollTop();//滚动条距顶部的距离    
+          var sl= $(document).scrollLeft();//滚动条距左边的距离    
+          var ch=$(window).height();//屏幕的高度    
+          var cw=$(window).width();//屏幕的宽度    
+            
+          var objH=$("#"+obj).height();//浮动对象的高度    
+          var objW=$("#"+obj).width();//浮动对象的宽度    
+      
+          var objT=Number(st)+(Number(ch)-Number(objH))/2;    
+          var objL=Number(sl)+(Number(cw)-Number(objW))/2;    
+          point.x = objL ;    
+          point.y = objT;      
+          return point;    
+           
+    }    
+     </script>   
+</head>
+<body>
+	<div style="position: absolute;height: 2000px;border: 1px solid green;"> <div style="margin-top: 400px">这个div用来撑起真个页面</div> </div>  
+    <div id="fd" style="height:100px;width:100px;z-index:9999;border:1px solid red">    
+         中间<br><span id="pos"></span>  
+    </div> 
+</body>
+</html>

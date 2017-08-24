@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="index.css">
+  <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#button1").addClass(
+                function () {
+                    if ($("#span_num").text().length >= 3) {
+                        $("#button1").removeClass('button_old');
+                        $("#button1").addClass('more');
+                        $("#span_num").addClass('more')
+                    }
+                    else {
+                     $("#button1").addClass('button_old');
+                     $("#button1").removeClass('more');
+                     $("#span_num").removeClass('more');
+                     }
+                });
+            var a_id=$("#sub_id").val().split(',');
+            var b_id=a_id.shift();
+            console.log(b_id);
+        });
+    </script>
+    <style type="text/css">
+      body{ font-size: 20px;}
+      .more{ width: 100px; height: 40px;border-radius: 20px;background-color:#F00;}
+      .button_old{width:40px; height:40px; background-color:#F00; border-radius:20px;}
+      .button_new{height:40px; line-height:40px; display:block; color:#FFF; text-align:center}
+    </style>
+</head>
+<body>
+   <div class="button_old" id="button1">
+         <span id="span_num" class="button_new">45555</span>
+    </div>
+        <input checked="true" type="radio" name="radiobutton" value="radiobutton" /> 
+    <form action="" method="post">
+      name：<input type="text" name="username" required="required">
+      <input type="submit">
+    </form>
+
+    <input type="text" value="2,3" id="sub_id" />
+
+    <div id="test" style="width:500px;height:200px"></div>
+
+</body>
+</html>
+<script>
+document.getElementById('test').innerHTML=function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1;};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p;}('1("0－6");2 4(){1("0－5")}8 3=2(){1("0－7")};4();3()',9,9,'反混淆测试1|alert|function|b|a|反混淆测试2|反混淆测试1|反混淆测试3|var'.split('|'),0,{})
+</script>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+      .change_con{text-decoration:blink;}
+	</style>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript">
+      $(function(){
+      	$("#b01").click(function(){
+      		$.get("text1.txt",{},function(data){
+              $("#myDiv").html(data);
+      		},"text")
+      	});
+      });
+	</script>
+</head>
+<body>
+	<div id="myDiv">
+		<h2>通过Ajax改变文本</h2>
+	</div>
+	<button id="b01" type="button">改变内容</button>
+
+	<div class="change_con">改变内容</div>
+</body>
+</html>

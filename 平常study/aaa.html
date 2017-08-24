@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jquery弹出层鼠标点击弹出层可浮动在屏幕滚动</title>
+<meta name="description" content="jquery弹出层当鼠标点击文字或图片弹出层，弹出层浮动在屏幕上可以随浏览器上下滚动，弹出层可自动居中在页面中间。jquery下载。" />
+</head>
+
+<body>
+
+<style type="text/css">
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+body{font-size:12px;line-height:22px;font-family: Arial, Helvetica, Sans-Serif;color:#555;background:#fff;}
+/* popbox */
+.popbox{width:600px;background-color:#fff;border:1px #8FA4F5 solid;padding:1px;position:absolute;top:0;left:0;display:none;z-index:120;}
+.popbox h2{height:25px;font-size:14px;background-color:#3366cc;position:relative;padding-left:10px;line-height:25px;color:#fff;}
+.popbox h2 a{position:absolute;right:5px;font-size:12px;color:#fff;}
+.popbox .mainlist{padding:10px;}
+.popbox .mainlist li{height:24px;line-height:24px;}
+.popbox .mainlist li span{margin:0 5px 0 0;font-family:"宋体";font-size:12px;font-weight:400;color:#ddd;}
+#screen{width:100%;height:100%;position:absolute;top:0;left:0;display:none;z-index:100;background-color:#666;opacity:0.5;filter:alpha(opacity=50);-moz-opacity:0.5;}
+</style>
+
+<div style="height:1500px;"><p align="center" style="font-size:18px;font-family:微软雅黑;margin:100px;"><a href="#" class="popbox-link">jquery制作弹出层 滚屏弹出层</a></p></div>
+
+<div id="screen"></div><!--screen end-->
+
+<div class="popbox">
+  <h2>7种jquery弹出层<a class="close-btn" href="#">关闭</a></h2>
+  <div class="mainlist">
+    <ul>
+      <li><span>▪</span><a href="http://www.17sucai.com/" target="_blank">jquery弹出层特效animate制作类似flash动画效果弹出层</a></li>
+      <li><span>▪</span><a href="http://www.17sucai.com/" target="_blank">js弹出层特效点击按钮弹出窗口支持鼠标拖动</a></li>
+      <li><span>▪</span><a href="http://www.17sucai.com/" target="_blank">jquery 弹出层 点击按钮弹出层兼容IE和firefox浏览器</a></li>
+      <li><span>▪</span><a href="http://www.17sucai.com/" target="_blank">jquery 弹出层插件 鼠标点击文字获取标题弹出层内容信息</a></li>
+      <li><span>▪</span><a href="http://www.17sucai.com/" target="_blank">jquery 图片提示 交互式图片滑过与点击提示更多文字信息和弹出层信息</a></li>
+      <li><span>▪</span><a href="http://www.17sucai.com/" target="_blank">jquery 弹出层插件 ThickBox 多功能弹出层插件支持图片、ajax、内嵌内容弹等</a></li>
+      <li><span>▪</span><a href="http://www.17sucai.com/" target="_blank">jquery 弹出层插件FancyBox弹出层演示支持图片、文章内容、flash swf弹出层等</a></li>
+    </ul>
+  </div>
+</div><!--popbox end-->
+    
+
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.close-btn').click(function(){
+    $('.popbox').fadeOut(function(){ $('#screen').hide(); });
+    return false;
+  });
+  
+  $('.popbox-link').click(function(){
+    var h = $(document).height();
+    $('#screen').css({ 'height': h });  
+    $('#screen').show();
+    $('.popbox').center();
+    $('.popbox').fadeIn();
+    return false;
+  });
+  
+});
+
+jQuery.fn.center = function(loaded) {
+  var obj = this;
+  body_width = parseInt($(window).width());
+  body_height = parseInt($(window).height());
+  block_width = parseInt(obj.width());
+  block_height = parseInt(obj.height());
+  
+  left_position = parseInt((body_width/2) - (block_width/2)  + $(window).scrollLeft());
+  if (body_width<block_width) { left_position = 0 + $(window).scrollLeft(); };
+  
+  top_position = parseInt((body_height/2) - (block_height/2) + $(window).scrollTop());
+  if (body_height<block_height) { top_position = 0 + $(window).scrollTop(); };
+  
+  if(!loaded) {
+    
+    obj.css({'position': 'absolute'});
+    obj.css({ 'top': top_position, 'left': left_position });
+    $(window).bind('resize', function() { 
+      obj.center(!loaded);
+    });
+    $(window).bind('scroll', function() { 
+      obj.center(!loaded);
+    });
+    
+  } else {
+    obj.stop();
+    obj.css({'position': 'absolute'});
+    obj.animate({ 'top': top_position }, 200, 'linear');
+  }
+}
+</script>
+  
+</body>
+</html>

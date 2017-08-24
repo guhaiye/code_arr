@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+       //gc_modal();//工厂模式
+       //createFun_modal();//构造函数模式
+       //prototype_modal();//原型模式
+       //BlendModal();//混合模式
+       //TrendPrototypeModal();//动态原型模式
+       //ConstructPrototype();//constructor
+       //testConstruct();
+       ExtendWay();//继承
+	});
+	/*工厂模式*/
+	function  gc_modal(){
+		var fn=function(){
+			return '工厂模式';
+		}
+		function  Parent(){
+			var Child = new Object();
+			Child.name='李小龙';
+			Child.age='30';
+			Child.fn=fn;
+			return Child;
+		}
+		var x = Parent();
+    console.log(x.name);
+    console.log(x.fn());
+	}
+	//构造函数模式
+	function createFun_modal(){
+		function person(name,age){
+           this.name = name;
+           this.age = age;
+           this.family = ['1','2','3'];
+           this.sayName = function(){
+           	 console.log(this.name);
+           };
+           this.myFamily = function(){
+           	 var size = this.family.length;
+           	 var str = '家庭成员：';
+           	 for(var i=0;i<size;i++){
+           	 	str += this.family[i] + ',';
+           	 }
+           	 console.log(str);
+           }
+		}
+		var p = new person('张三','15');
+		p.name='里斯';
+		p.sayName();
+		p.family.push('4');
+		p.myFamily();
+        var p1 = new person('周五','18');
+        p1.name='lisi';
+        p1.sayName();
+        p1.myFamily();
+	}
+	//原型模式
+	function  prototype_modal(){
+		function  createObject(){
+			createObject.prototype.name='张三';
+			createObject.prototype.age='19';
+			createObject.prototype.family=['1','2','3'];
+			createObject.prototype.sayName=function(){
+				console.log(this.name);
+			}
+			createObject.prototype.myFamily=function(){
+				var size=this.family.length;
+				var str='家庭成员：';
+				for(var i=0;i<size;i++){
+					str+= this.family[i] + ',';
+				}
+				console.log(str);
+			}
+		}
+		var x = new createObject();
+		x.name='李四';
+		x.family.push('4');
+		x.sayName();
+		x.myFamily();
+		var y = new createObject();
+		y.sayName();
+		y.myFamily();
+	}
+	//混合模式
+    function BlendModal(){
+    	function person(name,age){
+    		this.name = name;
+    		this.age = age;
+    		this.family = ['1','2','3','4'];
+    	}
+    	person.prototype.sayName = function(){
+    		console.log(this.name);
+    	}
+    	person.prototype.myFamily = function(){
+    		var size = this.family.length;
+    		var str="家庭成员：";
+    		for(var i=0;i<size;i++){
+    			str+=this.family[i] + ',';
+    		}
+    		console.log(str);
+    	}
+    	var a = new person('张三',22);
+    	a.sayName();
+    	a.family=['2'];
+    	a.myFamily();
+    	var b = new person('李四',20);
+    	b.sayName();
+    	b.myFamily();
+    }
+    //动态原型模式
+    function  TrendPrototypeModal(){
+    	function person(name,age){
+    		this.name=name;
+    		this.age=age;
+    		this.family=['1','2','3'];
+    		if(typeof this.myFamily != "function"){
+    			person.prototype.myFamily = function(){
+    				var size = this.family.length;
+    				var str="家庭成员：";
+    				for(var i=0;i<size;i++){
+                       str+= this.family[i] + ',';
+    				}
+    				console.log(str);
+    			}
+    		}
+    		if(typeof this.sayName != "function"){
+    			person.prototype.sayName = function(){
+    				console.log(this.name);
+    			}
+    		}
+    	}
+    	var x = new person('张三',19);
+    	x.name = "小名";
+    	x.family.push('4');
+    	x.sayName();
+    	x.myFamily();
+    	var y = new person('里斯',20);
+    	y.sayName();
+    	y.myFamily();
+    }
+    function  ConstructPrototype(){
+       function person(name){
+         this.name = name;
+       }
+       person.prototype.getName = function(){
+         console.log(this.name);
+       }
+       var  p1 = new person("张三");
+       console.log(p1.prototype);
+       console.log(p1.constructor === person);
+       console.log(person.prototype.constructor === person);
+       function Animal(){}
+       person.prototype = new Animal();
+       var  p2 = new person("章撒");
+       console.log(p2.constructor === person); 
+    }
+    function testConstruct(){
+       function person(name){
+         this.name = name;
+         this.showMe = function(){
+            console.log(this.name);
+         }
+       }
+       var one = new person('1');
+       one.showMe();
+       var two = new person('1');
+       console.log(one === two)
+    }
+    function  ExtendWay(){
+       function person(){
+         this.hair = 'black';
+         this.eye = 'black';
+         this.skin = 'yellow';
+         this.view = function(){
+           return this.hair + ',' + this.eye + ',' +this.skin;
+         }
+       }
+       function main(){
+         person.call(this,[]);
+         this.feature = ['beard','strong'];
+       }
+       main.prototype = new person();
+       var one = new main();
+       console.log(one.feature);
+       console.log(one.hair);
+       console.log(one.eye);
+       console.log(one.skin);
+       console.log(one.view());
+    }
+</script>
+</html>

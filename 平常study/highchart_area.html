@@ -1,0 +1,25 @@
+<meta charset="utf-8">
+<script src="highcharts.js"></script>
+<script src="exporting.js"></script>
+
+<div id="container" style="min-width: 900px; height: 400px; max-width: 900px; margin: 0 auto"></div>
+<script>
+Highcharts.chart('container', {
+    chart: {
+        type: 'area'
+    },
+    title: {
+        text: ''
+    },
+    xAxis: {
+        categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        name: 'John',
+        data: [5, 3, 4, 7, 2]
+    }]
+});
+</script>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id='main' style="width:1000px;height:400px;"></div>
+</body>
+<script src="jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="echarts.min.js" ></script>
+<script type="text/javascript">
+    var  array1=[120, 182, 101, 134, 0];
+    var  array2=[220, 182, 191, 234, 290];
+
+	// 指定图表的配置项和数据
+var list = [3, 8, 16, '-','-','-', 4, 8, 9, 16];
+for (var i = 0; i < list.length; i++) {
+  if (list[i] == '-') {
+     var symbolSize=14;
+  }else{
+     var symbolSize=14;
+  }
+}
+
+var option = {
+    tooltip : {
+        trigger:'item'// 'axis'或'item'
+    },
+    legend: {
+        data:['最高','最低']
+    },
+    dataZoom : {
+        show : true,
+        realtime : true,
+        start : 0,
+        end : 100
+    },
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : function(){
+                var list = [];
+                for (var i = 1; i <= 10; i++) {
+                    list.push('2013-03-' + i);
+                }
+                return list;
+            }()
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+            splitArea : {show : true}
+        }
+    ],
+    calculable:true,
+    series : [
+        {
+            name:'最低',
+            type:'line',
+            symbolSize: symbolSize,
+            itemStyle : {  
+                normal : {  
+                    lineStyle:{  
+                        type:'dashed',
+                    }  
+                }  
+            },  
+            data:function(){
+                for (var i = 0; i < list.length; i++) {
+                    if (list[i] == '-') {
+                        var data_val=getValueY(2,i,6);
+                        list[i]= {
+                            value:data_val,
+                            symbolSize : 0,
+                        }
+                    }
+                }
+
+                return list;
+            }()
+        }
+       
+    ]
+};
+	// 基于准备好的dom，初始化echarts实例
+	myChart = echarts.init(document.getElementById('main'));
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+
+function getValueY(PvalidX, CurX, NvalidX){
+    var PvalidY = getPvalidY(PvalidX);
+    var NvalidY = getPvalidY(NvalidX);
+    var TotalDataX = NvalidX - PvalidX;
+    var DataX = CurX - PvalidX;
+    var TotalDataY;
+    var LineY;
+    if(PvalidY <= NvalidY){
+        TotalDataY = NvalidY - PvalidY;
+        var deltaY = (DataX * TotalDataY / TotalDataX).toFixed(2);
+        LineY = Number(PvalidY) + Number(deltaY);
+    }else{
+        TotalDataY = PvalidY - NvalidY;
+        var deltaY = (DataX * TotalDataY / TotalDataX).toFixed(2);
+        LineY = PvalidY - deltaY;
+    }
+    return (parseFloat(LineY)).toFixed(2);
+}
+function getPvalidY(xnum){
+   return  list[xnum];
+}
+</script>
+</html>

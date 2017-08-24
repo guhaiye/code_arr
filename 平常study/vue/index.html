@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+<script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+   <fieldset>
+   	  <legend>Vue Test</legend>
+   	  <div class="form-group">
+   	  	<label for="">Name:</label>
+   	  	<input type="text" v-model="newPerson.name" id="vue_name">
+   	  </div>
+      <div class="form-group">
+   	  	<label for="">Age:</label>
+   	  	<input type="text" v-model="newPerson.age">
+   	  </div>
+   	  <div class="form-group">
+   	  	<label for="">sex:</label>
+   	  	<select name="" id="" v-model="newPerson.sex">
+   	  		<option value="male">male</option>
+   	  		<option value="female">female</option>
+   	  	</select>
+   	  </div>
+   	  <div class="form-group">
+   	  	 <button @click="createPerson">增加</button>
+   	  </div>
+   	  <table>
+   	  	 <thead>
+   	  	 	<tr>
+   	  	 	  	<th>姓名</th>
+   	  	 	  	<th>年龄</th>
+   	  	 	  	<th>性别</th>
+   	  	 	  	<th>delete</th>
+   	  	 	</tr>
+   	  	 </thead>
+   	  	 <tbody>
+   	  	 	<tr v-for="p in people">
+   	  	 		<td>{{p.name}}</td>
+   	  	 		<td>{{p.age}}</td>
+   	  	 		<td>{{p.sex}}</td>
+   	  	 		<td class="text-center">
+   	  	 			<button @click="deletePerson()">删除</button>
+   	  	 		</td>
+   	  	 	</tr>
+   	  	 </tbody>
+   	  </table>
+   </fieldset>
+</div>
+<div id="vif">
+	<p v-if="yes">Yes!</p>
+	<p v-else="sex">male</p>
+	<p v-if="age >= 25">Age:{{age}}</p>
+</div>
+<div id="app-4">
+  <p>{{message}}</p>
+  <button v-on:click="reverseMessage">reverseMessage</button>
+</div>
+<div id="app-5">
+  <ul>
+  <app-item v-for="todo in todos" v-bind:app_smg="todo"></app-item>
+  </ul>
+</div>
+<div id="filter_con">
+	{{ message | capitalize }}
+</div>
+<div id="radio_choice">
+	<p>
+		<input type="radio" id="a1" value="0" v-model="picked">
+		<label for="a1">选择1</label>
+	</p>
+	<p>
+		<input type="radio" id="a2" value="1" v-model="picked">
+		<label for="a2">选择2</label>
+	</p>
+  <p>
+    <input type="radio" id="a3" value="2" v-model="picked">
+    <label for="a3">选择3</label>
+  </p>
+</div>
+<div id="todo-item1">
+  <ul>
+    <todo-item v-for="todo in todos" v-bind:smg_thing="todo"></todo-item>
+  </ul>
+</div>
+<div id="local_storage"></div>
+<div id="demo_location"></div>
+</body>
+<script src="jquery-1.10.2.min.js"></script>
+<script>
+$(function(){
+  getLocation();
+  //alert(typeof null); //object
+  //alert(typeof undefined);//undefined
+  //alert(typeof NaN);//number
+  //alert(NaN == undefined);//false
+  //alert(NaN == NaN);//false
+  // var str = "123abc";
+  // alert(typeof str++);//number
+  // alert(str);//NaN
+  var num_new=format('30000000000000');
+  console.log(num_new);
+  var new_arr=[1,3,4,2,1,3,4,5,6];
+  var new_arr_name=['天天','向上','有','天天','天天','向上','有','天天','向上'];
+  var a_arr=UniqueAray(new_arr,new_arr_name);
+});
+//prototype
+// function FirstPrototype(name,age,sex){
+//   this.name=name;
+//   this.age=age;
+//   this.sex=sex;
+// }
+// var bill=new FirstPrototype('张三','20','女');
+// FirstPrototype.prototype.salary=null;
+// bill.salary='20000';
+// console.log(bill.salary);
+//js数组去重
+function  UniqueAray(num,num_name){
+  var a=[];
+  var arr_b=[];
+  $.each(num,function(index){
+    var b=a.indexOf(num[index]);//indexOf没有出现<0
+    if(b<0){
+      a.push(num[index]);
+      arr_b.push(num_name[index]);
+    }
+  });
+  return arr_b;
+}
+ //千位加;
+ function format(num){
+  var num=num.toString();
+  var str="";
+  for(i=num.length-1,j=1;i>=0;i--,j++){
+    if(j%3 == 0 && i!=0){
+      str+=num[i]+';';
+    }else{
+      str+=num[i];
+    }
+  }
+  return str.split('').reverse().join('');//字符串=》数组=》翻转=》字符串
+ }
+ function People(name){
+   this.name=name;
+   this.Introduce=function(){
+     console.log("我的名字是："+this.name);
+   }
+ }
+ People.run=function(){
+  console.log("I can run");
+ }
+ People.prototype.Introducechinese=function(){
+  console.log("我的名字是："+this.name);
+ }
+ var instance=new People('张三');
+ instance.Introduce();
+ instance.Introducechinese();
+ People.run();
+ // function  HelloClass(){}
+ // function  HelloSubClass(){}
+ // HelloSubClass.prototype=HelloClass.prototype;
+ // HelloSubClass.prototype.property="name";
+ // HelloSubClass.prototype.subMethods=function(){
+ //  console.log("in method");
+ // }
+ // var instance=new HelloSubClass();
+ // instance.subMethods();
+//  function Person(name){
+//    this.name='张三';
+//  }
+//  Person.prototype.share=[];
+//  Person.prototype.printName=function(){
+//   console.log(this.name);
+//  }
+//  var instance=new Person('李四');
+// instance.printName();
+  // function SuperType() {
+  //   this.property = true;
+  // }
+  // SuperType.prototype.getSuperValue = function() {
+  //    return this.property;
+  // }
+  // function SubType() {
+  //    this.property = false;
+  // }
+  // //继承了SuperType
+  // SubType.prototype = new SuperType();
+  // SubType.prototype.getSubValue = function (){
+  //    return this.property;
+  // }
+  // var instance = new SubType();
+  // console.log(instance.getSuperValue());//false
+// function SuperType(){
+//       this.property=true;
+// }
+// SuperType.prototype.getSuperValue=function(){
+//       return this.property;
+// };
+// function SubType(){
+//       this.subproperty=false;
+// }
+// SubType.prototype=new SuperType(); //继承了SuperType
+// SubType.prototype={
+//       getSuperValue:function(){
+//              return false;
+//       }
+// };
+// var instance=new SubType();
+// alert(instance.getSuperValue()); //false
+// alert(instance instanceof SuperType); 
+// function SuperType(){
+//   this.friends=["gay1","gay2"];
+// }
+// function SubType(){
+
+// }
+// SubType.prototype=new SuperType();
+// var instance1=new SubType();
+// instance1.friends.push("gay3");
+// console.log(instance1.friends);
+/*本地缓存*/
+if(localStorage.pagecount){
+  localStorage.pagecount = Number(localStorage.pagecount) + 1;
+}else{
+  localStorage.pagecount = 1;
+}
+$("#local_storage").html(localStorage.pagecount);
+var vm = new Vue({
+  el: '#app',
+  data: {
+    newPerson:{
+    	name:'张三',
+        age:20,
+        sex:'female'
+    },
+    people:[{
+    	name:'11',
+    	age:23,
+    	sex:'female'
+    },{
+    	name:'22',
+    	age:24,
+    	sex:'male'
+    }],
+  },
+  methods:{
+  	createPerson:function(){
+       this.people.push(this.newPerson);
+       this.newPerson={name:'张三',age:20,sex:'male'}
+  	},
+  	deletePerson:function(index){
+       this.people.splice(index,1);
+  	}
+  }
+});
+var vm1=new Vue({
+  el:"#vif",
+  data:{
+  	yes:false,
+  	age:30,
+  	sex:true
+  }
+});
+var vm2 = new Vue({
+	el:"#filter_con",
+	data:{
+		message:'runoob',
+	},
+	filters:{
+	  capitalize:function(value){
+         if(!value) return '';
+         value=value.toString();
+         return value.charAt(0).toUpperCase() + value.slice(1);
+	  }
+	}
+});
+var vm3 = new Vue({
+	el:"#radio_choice",
+	data:{
+		picked:"0"
+	}
+});
+var vm4 = new Vue({
+  el:"#app-4",
+  data:{
+    message:"Hello World!"
+  },
+  methods:{
+    reverseMessage:function(){
+      this.message=this.message.split('').reverse().join('');
+    }
+  }
+});
+Vue.component('todo-item',{
+  props:["smg_thing"],
+  template:"<li>{{smg_thing.text}}</li>"
+});
+var vm5=new Vue({
+  el:"#todo-item1",
+  data:{
+    todos:[{
+      text:'Learn JavaScript'
+    },{
+      text:'Learn Vue'
+    },{
+      text:'Build something awesome'
+    }],
+  }
+});
+Vue.component('app-item',{
+  props:['app_smg'],
+  template:"<li>{{app_smg.text}}</li>"
+});
+var vm6=new Vue({
+  el:"#app-5",
+  data:{
+    todos:[{
+      text:'q'
+    },{
+      text:'b'
+    },{
+      text:'x'
+    }],
+  }
+});
+/*共享位置信息*/
+function  getLocation(){
+  if(navigator.geolocation){
+     navigator.geolocation.getCurrentPosition(showPosition);
+  }else{
+     $("#demo_location").html('Geolocation is not supported by this browser.');
+  }
+}
+function showPosition(){
+  $("#demo_location").html(''+position.coords.latitude+','+position.coords.longitude+'');
+}
+</script>
+</html>

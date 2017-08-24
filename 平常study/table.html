@@ -1,0 +1,168 @@
+<html>
+ <head>
+ <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+ <script language="javascript" type="text/javascript" src="jquery-1.10.2.min.js"></script>
+//  <script type="text/javascript">
+// function _w_table_rowspan(_w_table_id,_w_table_colnum){
+//  _w_table_firsttd = "";
+//  _w_table_currenttd = "";
+//  _w_table_SpanNum = 0;
+//  _w_table_Obj = $(_w_table_id + " tr td:nth-child(" + _w_table_colnum + ")");
+//  _w_table_Obj.each(function(i){
+//  if(i==0){
+//  _w_table_firsttd = $(this);
+//  _w_table_SpanNum = 1;
+//  }else{
+//  _w_table_currenttd = $(this);
+//  if(_w_table_firsttd.text()==_w_table_currenttd.text()){
+//  _w_table_SpanNum++;
+//  _w_table_currenttd.hide(); //remove();
+//  _w_table_firsttd.attr("rowSpan",_w_table_SpanNum);
+//  }else{
+//  _w_table_firsttd = $(this);
+//  _w_table_SpanNum = 1;
+//  }
+//  }
+//  });
+//  }
+// </script>
+ </script>
+<script type="text/javascript">
+  $(document).ready(function(){
+ // var rowCount = 4;
+ // for(var i = 1; i <= rowCount; i++)
+ // {
+ // _w_table_rowspan("#w_table_id",i);
+ // }
+ mergeSameCell(document.getElementById('tableTbl'),1,-1,[0,1]);
+ });
+
+ </script>
+ <script type="text/javascript">
+function mergeSameCell(tbl,beginRow,endRow,colIdxes){  
+    var colIdx = colIdxes[0];  
+    var newColIdxes = colIdxes.concat();  
+    newColIdxes.splice(0,1)  
+    var delRows = new Array();  
+    var rs = tbl.rows;  
+    //endRow为0的时候合并到最后一行，小于0时表示最后有-endRow行不合并  
+    if(endRow === 0){  
+        endRow = rs.length - 1;  
+    }else if(endRow < 0){  
+        endRow = rs.length - 1 + endRow;  
+    }  
+    var rowSpan = 1; //要设置的rowSpan的值  
+    var rowIdx = beginRow; //要设置rowSpan的cell行下标  
+    var cellValue; //存储单元格里面的内容  
+    for(var i=beginRow; i<= endRow + 1; i++){  
+        if(i === endRow + 1){//过了最后一行的时候合并前面的单元格  
+            if(newColIdxes.length > 0){  
+                mergeSameCell(tbl,rowIdx,endRow,newColIdxes);  
+            }  
+            rs[rowIdx].cells[colIdx].rowSpan = rowSpan;  
+        }else{  
+            var cell = rs[i].cells[colIdx];  
+            if(i === beginRow){//第一行的时候初始化各个参数  
+                cellValue = cell.innerHTML;  
+                rowSpan = 1;  
+                rowIdx = i;  
+            }else if(cellValue != cell.innerHTML){//数据改变合并前面的单元格  
+                cellValue = cell.innerHTML;  
+                if(newColIdxes.length > 0){  
+                    mergeSameCell(tbl,rowIdx,i - 1,newColIdxes);  
+                }  
+                rs[rowIdx].cells[colIdx].rowSpan = rowSpan;  
+                rowSpan = 1;  
+                rowIdx = i;  
+            }else if(cellValue === cell.innerHTML){//数据和前面的数据重复的时候删除单元格  
+                rowSpan++;  
+                delRows.push(i);  
+            }  
+        }  
+    }  
+    for(var j=0;j<delRows.length; j++){  
+        rs[delRows[j]].deleteCell(colIdx);  
+    }  
+}  
+  
+//调用  
+
+ </script>
+ </head>
+ <body>
+  <table id="tableTbl">
+ <tr bgcolor="#BBBB00">
+ <th>省份</th>
+ <th>城市</th>
+ <th>商品代码</th>
+ <th>商品名称</th>
+ <th>数量</th>
+ </tr>
+ <tr bgcolor="#FFFF00">
+ <td>广东</td>
+ <td>深圳</td>
+ <td>00028</td>
+ <td>红花油</td>
+ <td>100</td>
+ </tr>
+ <tr bgcolor="#FFFF00">
+ <td>广东</td>
+ <td>深圳</td>
+ <td>00028</td>
+ <td>红花油</td>
+ <td>101</td>
+ </tr>
+ <tr bgcolor="#FFFF00">
+ <td>广东</td>
+ <td>深圳</td>
+ <td>00028</td>
+ <td>红花油</td>
+ <td>102</td>
+ </tr>
+ <tr bgcolor="#FFFF00">
+ <td>广东</td>
+ <td>广州</td>
+ <td>00027</td>
+ <td>白花油</td>
+ <td>200</td>
+ </tr>
+ <tr bgcolor="#FFFF00">
+ <td>广东</td>
+ <td>广州</td>
+ <td>00028</td>
+ <td>红花油</td>
+ <td>300</td>
+ </tr>
+ <tr bgcolor="#FFFF00">
+ <td>广东</td>
+ <td>深圳</td>
+ <td>00028</td>
+ <td>红花油</td>
+ <td>400</td>
+ </tr>
+ <tr bgcolor="#FFFF00">
+ <td>广东</td>
+ <td>深圳</td>
+ <td>00028</td>
+ <td>红花油</td>
+ <td>401</td>
+ </tr>
+ <tr bgcolor="#FFFF00">
+ <td>广东</td>
+ <td>深圳</td>
+ <td>00028</td>
+ <td>红花油</td>
+ <td>402</td>
+ </tr>
+ <tr bgcolor="#FFFF00">
+ <td>广东</td>
+ <td>深圳</td>
+ <td>00028</td>
+ <td>红花油</td>
+ <td>403</td>
+ </tr>
+ </table>
+ </body>
+</html>
+
+

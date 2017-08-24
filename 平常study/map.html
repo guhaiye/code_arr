@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+    <div id="map_newdiv"></div>
+	<div id="mapdiv">
+		<input type="text" value="guhaiye">
+		<select name="" id="">
+			<option value="0">gu</option>
+			<option value="1">hai</option>
+			<option value="2">ye</option>
+		</select>
+		<input type="text" value="tianna">
+	</div>
+</body>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+      var new_map=$("#mapdiv :input").map(function(){
+      	 return $(this).val();
+      }).get().join(';');
+      $("#map_newdiv").html(new_map);
+	});
+</script>
+</html>

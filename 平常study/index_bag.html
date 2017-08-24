@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+       .boxborder{width:100px;height:100px;border:1px solid red;}
+       .bagred{background:red;}
+	</style>
+	<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+	<script type="text/javascript">
+      $(function(){
+		  $(document).bind("click",function(e){
+		    var target = $(e.target);
+		    if(target.closest("#box_border").length == 0){
+		      $("#box_border").removeClass('bagred');
+		    }
+		  });
+		   $("#box_border").click(function(){
+	      	var boxhasclass=$(this).hasClass('.bagred');
+	      	if(!boxhasclass){
+	      		$(this).addClass('bagred');
+	      	}
+	      });
+      });
+	</script>
+</head>
+<body>
+	<div class="boxborder" id="box_border"></div>
+</body>
+</html>

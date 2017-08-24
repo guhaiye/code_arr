@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script src="jquery-1.10.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+  arg();
+});
+function sum(){
+ var str=0;
+ for(var i=0;i<arguments.length;i++){  
+    if(!isNaN(arguments[i])){
+      str += arguments[i];
+    }      
+ }
+ alert(str);
+}
+function arg(){
+  var maxnum=Math.min(1,2,3,4,5);
+  console.log(maxnum);
+}
+
+</script>

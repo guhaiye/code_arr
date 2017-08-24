@@ -1,0 +1,6 @@
+*{box-sizing:border-box;}
+.leftcon1{width:300px;border:1px solid red;margin:0 auto;padding:50px 30px;}
+.leftcon2{width: 200px; height: 500px;margin:20px auto;padding:30px;}
+.leftcon2>div{border:1px solid blue;}
+.leftcon{width:300px;float:left;}
+.rightcon{width:600px;float:left;border:1px solid black;margin-left:20px;padding:200px 10px;}
