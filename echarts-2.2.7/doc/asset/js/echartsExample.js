@@ -115,7 +115,9 @@ function refresh(isBtnRefresh){
     myChart = echarts.init(domMain, curTheme);
     window.onresize = myChart.resize;
     (new Function(editor.doc.getValue()))();
-    myChart.setOption(option, true)
+    myChart.setOption(option, true);
+    var arr = [125.03,46.58];
+    alert(myChart.chart.map.getPosByGeo("china",arr)); 
     domMessage.innerHTML = '';
 }
 

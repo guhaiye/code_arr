@@ -6,7 +6,7 @@ var array2 = [
 	{text:"系统管理",data:[{text:"场景管理",data:[{text:"卖场管理","source":"..ml/tableList.html"},{text:"商户管理","source":"..ml/tableList.html"}]}]},
 ];
 var array3 = [
-	{text:"系统管理",data:[{text:"场景管理1",data:[{text:"卖场管理1","source":"..ml/tableList.html"},{text:"商户管理3","source":"..ml/tableList.html"}]}]},
+	{text:"系统管理",data:[{text:"场景管理",data:[{text:"卖场管理1","source":"..ml/tableList.html"},{text:"商户管理3","source":"..ml/tableList.html"}]}]},
 ];
 
 array1 = array1.concat(array2,array3);
@@ -75,7 +75,6 @@ function uniqueArray(array, key){
 }
 
 function getMenu(){
-
     // var a_json=$.extend( true,adminJson1, adminJson2 ); 
     // console.log(a_json);
 	var arr_first=[],arr_second,arr_third,first_data_arr=[],second_data_arr=[],third_data_arr=[];
