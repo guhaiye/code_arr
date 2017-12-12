@@ -102,6 +102,8 @@ $(function(){
   // alert(str);//NaN
   var num_new=format('30000000000000');
   console.log(num_new);
+  var newnum = FormatQian('87463297');
+  console.log(newnum);
   var new_arr=[1,3,4,2,1,3,4,5,6];
   var new_arr_name=['天天','向上','有','天天','天天','向上','有','天天','向上'];
   var a_arr=UniqueAray(new_arr,new_arr_name);
@@ -141,6 +143,13 @@ function  UniqueAray(num,num_name){
     }
   }
   return str.split('').reverse().join('');//字符串=》数组=》翻转=》字符串
+ }
+ //千位加用正则
+ function  FormatQian(num){
+      var newstr = num.replace(/\d{1,3}(?=(\d{3})+$)/g,function(s){
+        return s+','
+      });
+      return newstr;
  }
  function People(name){
    this.name=name;

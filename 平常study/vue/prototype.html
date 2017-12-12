@@ -15,9 +15,9 @@
        //prototype_modal();//原型模式
        //BlendModal();//混合模式
        //TrendPrototypeModal();//动态原型模式
-       //ConstructPrototype();//constructor
+       ConstructPrototype();//constructor返回对创建此对象的数组函数的引用。
        //testConstruct();
-       ExtendWay();//继承
+       //ExtendWay();//继承
 	});
 	/*工厂模式*/
 	function  gc_modal(){
@@ -155,7 +155,7 @@
          console.log(this.name);
        }
        var  p1 = new person("张三");
-       console.log(p1.prototype);
+       console.log(p1.constructor);
        console.log(p1.constructor === person);
        console.log(person.prototype.constructor === person);
        function Animal(){}
@@ -173,7 +173,9 @@
        var one = new person('1');
        one.showMe();
        var two = new person('1');
-       console.log(one === two)
+       console.log(one === two);
+       console.log(one.showMe === two.showMe);
+       console.log(one.constructor === two.constructor)
     }
     function  ExtendWay(){
        function person(){

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简单插件制作</title>
+</head>
+<body>
+	<div id="myDiv">简单插件制作</div>
+</body>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	// (function($){
+	// 	$.fn.extend({//对html元素的
+	// 		test:function(){
+	// 		  console.log($(this).attr('id'));
+	// 		}
+	// 	});
+	// })(jQuery);
+	// $("#myDiv").test();
+ //    (function($){//对jquery插件的
+ //    	$.extend(function(){
+ //    		test:function(){
+ //    			console.log(1);
+ //    		}
+ //    	});
+ //    })(jQuery);
+//  (function($){
+//  	$.fn.greenify = function(options){
+//        var settings = $.extend({
+//           color:"#5dad5d",
+//           backgroundColor:'#000',
+//           padding:'20px'
+//        },options);
+//        return this.css({
+//        	 color:settings.color,
+//          backgroundColor:settings.backgroundColor,
+//          padding:'20px'
+//        });
+//  	}
+//  })(jQuery);
+//  $("#myDiv").greenify({
+//  	color:'#fff',
+//  	backgroundColor:'#000',
+//  	padding:'20px'
+//  });
+//  (function($){
+//  	var PrivateFunction = function(){
+
+//  	}
+//  	var methods = {
+//  		init:function(){
+//  			return this.each(function(){
+//  				var $this = $(this);
+//  			});
+//  		},
+//  		destroy:function(){
+//  			return this.each(function(){
+
+//  			});
+//  		}
+//  	}
+//  	$.fn.pluginName = function(){
+//  		var method = arguments[0];
+//  		if(methods[method]){
+//  			method = methods[method];
+//  		}else if(typeof(method) == 'object' || !method){
+//             method = methods.init;
+//  		}else{
+//  			return this;
+//  		}
+//  		return method.call(this);
+//  	}
+//  })(jQuery);
+//  ; (function ($, window, document, undefined) {//插件开发基本形式
+//     "use strict";
+//     var defaults = {
+//         pageIndex: 0,
+//         pageSize: 6,
+//         itemCount: 50,
+//         maxButtonCount: 7,
+//         prevText: "上一页",
+//         nextText: "下一页",
+//         buildPageUrl: null,
+//         onPageChanged: null
+//     };  
+ 
+//     $.fn.pager = function (options) {
+//         options = $.extend(defaults, options || {});
+//     }
+// })(jQuery, window, document);
+(function(window.document){
+  var maskshare = function(targetdom,options){
+    this.options = this.extend({
+    	imgSrc:'';
+    },options);
+    if((typeof targetdom) === 'string'){
+    	this.targetdom = document.querySelector(targetdom);
+    }else{
+    	this.targetdom = targetdom;
+    }
+    var boxdom = document.createElement('div');
+    var imgdom = document.createElement('img');
+    boxdom.style.cssText="display: none;position: absolute;left: 0;top: 0;width: 100%;height:100%;background-color: rgba(0,0,0,0.8);z-index:9999";
+    imgdom.style.cssText="margin-top:20px;width:100%";
+    if(this.options.boxDomstyle){
+    	this.setStyle(boxdom,this.options.boxDomstyle);
+    }
+    if(this.options.imgDomstyle){
+    	this.setStyle(imgdom,this.options.imgDomstyle);
+    }
+    imgdom.src=this.options.imgSrc;
+    boxdom.appendChild(imgdom);
+    this.boxdom = boxdom;
+    this.init();
+  }
+  maskshare.prototype = {
+  	init:function(){
+  		this.event();
+  	},
+  	event:function(){
+  		var _this = this;
+  		this.targetdom.addEventListener('click',function(){
+  			document.body.appendChild(_this.boxdom);
+  			_this.boxdom.style.display = 'block';
+            _this.options.open && _this.options.open();  
+  		},false);
+  		this.targetdom.addEventListener('click',function(){
+  			this.style.display = 'none';
+  			_this.options.close && _this.options.close();
+  		},false);
+  	}
+  }
+  window.maskshare = maskshare;
+})(window,document);
+</script>
+</html>
